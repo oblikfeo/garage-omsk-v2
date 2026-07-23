@@ -1,36 +1,50 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Гараж самообслуживания — сайт (Омск)
 
-## Getting Started
+Лендинг СТО самообслуживания на **Next.js 16** + **Tailwind CSS 4**. Готов к деплою на [Vercel](https://vercel.com).
 
-First, run the development server:
+## Локальный запуск
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Откройте [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Сборка
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build
+npm start
+```
 
-## Learn More
+## Деплой на Vercel
 
-To learn more about Next.js, take a look at the following resources:
+1. Импортируйте репозиторий на [vercel.com/new](https://vercel.com/new).
+2. Framework Preset: **Next.js** (определяется автоматически).
+3. Root Directory: оставьте корень репозитория (если репозиторий содержит только папку `website`).
+4. Build Command: `npm run build`
+5. Output: стандартный для Next.js.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Переменные окружения
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+| Переменная | Описание |
+|---|---|
+| `NEXT_PUBLIC_SITE_URL` | Продакшен-домен для SEO, sitemap и Open Graph. Пример: `https://garage-omsk.ru` |
 
-## Deploy on Vercel
+На Vercel, если переменная не задана, используется автоматический домен деплоя (`VERCEL_URL`).
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Структура
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- `src/app/` — страницы (App Router)
+- `src/components/` — UI-компоненты
+- `src/lib/data.ts` — контент сайта (телефон, адрес, услуги, цены)
+- `public/` — статические файлы
+
+## SEO-страницы
+
+- `/` — главная
+- `/sto-samoobsluzhivaniya-omsk`
+- `/garazh-na-chas-omsk`
+- `/arenda-podyomnika-omsk`
+- `/politika-konfidentsialnosti`
