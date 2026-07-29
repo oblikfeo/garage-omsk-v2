@@ -10,7 +10,8 @@ import { site } from "@/lib/data";
 const navLinks = [
   { href: "/#services", label: "Услуги" },
   { href: "/#prices", label: "Цены" },
-  { href: "/#how", label: "Как это работает" },
+  { href: "/#gallery", label: "Фото" },
+  { href: "/#how", label: "Как работает" },
   { href: "/#safety", label: "Безопасность" },
   { href: "/#faq", label: "FAQ" },
   { href: "/#contacts", label: "Контакты" },
@@ -33,8 +34,12 @@ export default function Header() {
         scrolled ? "border-white/10 shadow-lg shadow-black/20" : "border-transparent"
       }`}
     >
-      <div className="mx-auto flex h-[68px] max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 sm:h-[72px] lg:px-8">
-        <Link href="/" className="flex items-center gap-2.5 sm:gap-3" onClick={() => setOpen(false)}>
+      <div className="mx-auto flex h-[68px] max-w-7xl items-center justify-between gap-4 px-4 sm:h-[72px] sm:px-6 lg:px-8">
+        <Link
+          href="/"
+          className="flex shrink-0 items-center gap-2.5 sm:gap-3"
+          onClick={() => setOpen(false)}
+        >
           <Image
             src="/logo.jpg"
             alt={`${site.fullName} — логотип`}
@@ -53,12 +58,12 @@ export default function Header() {
           </span>
         </Link>
 
-        <nav className="hidden items-center gap-7 lg:flex">
+        <nav className="hidden items-center gap-6 xl:flex">
           {navLinks.map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              className="group relative py-1 text-sm font-medium text-muted transition-colors duration-200 hover:text-offwhite"
+              className="group relative whitespace-nowrap py-1 text-center text-sm font-medium leading-tight text-muted transition-colors duration-200 hover:text-offwhite"
             >
               {link.label}
               <span className="absolute inset-x-0 -bottom-0.5 h-px origin-left scale-x-0 bg-orange transition-transform duration-300 ease-out group-hover:scale-x-100" />
@@ -66,17 +71,17 @@ export default function Header() {
           ))}
         </nav>
 
-        <div className="hidden items-center gap-4 lg:flex">
+        <div className="hidden shrink-0 items-center gap-4 xl:flex">
           <a
             href={`tel:${site.phoneHref}`}
-            className="flex items-center gap-2 text-sm font-medium text-offwhite transition-colors duration-200 hover:text-orange"
+            className="flex items-center gap-2 whitespace-nowrap text-sm font-medium text-offwhite transition-colors duration-200 hover:text-orange"
           >
-            <Phone className="h-4 w-4 text-orange" />
+            <Phone className="h-4 w-4 shrink-0 text-orange" />
             {site.phone}
           </a>
           <Link
             href="/#booking"
-            className="rounded-lg bg-orange px-4 py-2.5 text-sm font-semibold text-graphite-deep shadow-glow transition-transform duration-200 hover:scale-[1.03] active:scale-[0.98]"
+            className="whitespace-nowrap rounded-lg bg-orange px-4 py-2.5 text-sm font-semibold text-graphite-deep shadow-glow transition-transform duration-200 hover:scale-[1.03] active:scale-[0.98]"
           >
             Записаться онлайн
           </Link>
@@ -86,7 +91,7 @@ export default function Header() {
           type="button"
           aria-label={open ? "Закрыть меню" : "Открыть меню"}
           onClick={() => setOpen((v) => !v)}
-          className="flex h-10 w-10 items-center justify-center rounded-lg border border-white/10 text-offwhite transition-colors duration-200 hover:bg-white/5 lg:hidden"
+          className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-white/10 text-offwhite transition-colors duration-200 hover:bg-white/5 xl:hidden"
         >
           <motion.span
             key={open ? "close" : "menu"}
@@ -107,7 +112,7 @@ export default function Header() {
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
-            className="overflow-hidden border-t border-white/10 bg-graphite lg:hidden"
+            className="overflow-hidden border-t border-white/10 bg-graphite xl:hidden"
           >
             <nav className="mx-auto flex max-w-7xl flex-col gap-1 px-4 py-4 sm:px-6">
               {navLinks.map((link, i) => (
@@ -128,9 +133,9 @@ export default function Header() {
               ))}
               <a
                 href={`tel:${site.phoneHref}`}
-                className="flex items-center gap-2 rounded-lg px-3 py-2.5 text-sm font-medium text-offwhite"
+                className="flex items-center gap-2 whitespace-nowrap rounded-lg px-3 py-2.5 text-sm font-medium text-offwhite"
               >
-                <Phone className="h-4 w-4 text-orange" />
+                <Phone className="h-4 w-4 shrink-0 text-orange" />
                 {site.phone}
               </a>
               <Link

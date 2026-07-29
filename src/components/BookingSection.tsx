@@ -11,6 +11,7 @@ import {
   Clock,
 } from "lucide-react";
 import { priceFor, services, site, type ServiceId } from "@/lib/data";
+import Section from "./Section";
 import SectionHeading from "./SectionHeading";
 import FadeIn from "./FadeIn";
 
@@ -87,17 +88,24 @@ export default function BookingSection() {
   }
 
   return (
-    <section id="booking" className="relative overflow-hidden py-16 sm:py-20">
-      <div className="pointer-events-none absolute inset-0 bg-diagonal-grid opacity-60" />
-      <div className="relative mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-        <SectionHeading
-          eyebrow="Онлайн-запись"
-          title="Забронируйте пост за 2 минуты"
-          description="Выберите оборудование, дату и время — администратор подтвердит бронь по телефону или в мессенджере."
-          center
-        />
+    <Section
+      id="booking"
+      variant="deep"
+      pattern="hatch"
+      band
+      containerClassName="max-w-4xl"
+    >
+      <SectionHeading
+        eyebrow="Онлайн-запись"
+        title="Забронируйте пост за 2 минуты"
+        description="Выберите оборудование, дату и время — администратор подтвердит бронь по телефону или в мессенджере."
+        center
+      />
 
-        <FadeIn delay={0.1} className="mt-8 rounded-3xl border border-white/10 bg-surface p-5 sm:mt-10 sm:p-8">
+      <FadeIn
+        delay={0.1}
+        className="card-metal mt-8 rounded-3xl border border-white/10 bg-surface p-5 shadow-xl shadow-black/20 sm:mt-10 sm:p-8"
+      >
           {submitted ? (
             <motion.div
               initial={{ opacity: 0, scale: 0.96 }}
@@ -125,7 +133,7 @@ export default function BookingSection() {
               <button
                 type="button"
                 onClick={reset}
-                className="mt-6 rounded-xl border border-white/15 px-6 py-3 text-sm font-semibold text-offwhite transition-colors duration-200 hover:bg-white/5"
+                className="mt-6 rounded-xl border border-white/15 px-6 py-3 text-center text-sm font-semibold text-offwhite transition-colors duration-200 hover:bg-white/5"
               >
                 Оформить ещё одну заявку
               </button>
@@ -220,10 +228,10 @@ export default function BookingSection() {
                           type="button"
                           disabled={!canGoStep2}
                           onClick={() => goTo(2)}
-                          className="flex items-center gap-2 rounded-xl bg-orange px-6 py-3 text-sm font-semibold text-graphite-deep transition-all duration-200 hover:enabled:scale-[1.03] disabled:cursor-not-allowed disabled:opacity-40"
+                          className="flex items-center gap-2 whitespace-nowrap rounded-xl bg-orange px-6 py-3 text-sm font-semibold text-graphite-deep transition-all duration-200 hover:enabled:scale-[1.03] disabled:cursor-not-allowed disabled:opacity-40"
                         >
                           Далее
-                          <ArrowRight className="h-4 w-4" />
+                          <ArrowRight className="h-4 w-4 shrink-0" />
                         </button>
                       </div>
                     </motion.div>
@@ -357,19 +365,19 @@ export default function BookingSection() {
                         <button
                           type="button"
                           onClick={() => goTo(1)}
-                          className="flex items-center gap-2 rounded-xl border border-white/15 px-6 py-3 text-sm font-semibold text-offwhite transition-colors duration-200 hover:bg-white/5"
+                          className="flex items-center gap-2 whitespace-nowrap rounded-xl border border-white/15 px-6 py-3 text-sm font-semibold text-offwhite transition-colors duration-200 hover:bg-white/5"
                         >
-                          <ArrowLeft className="h-4 w-4" />
+                          <ArrowLeft className="h-4 w-4 shrink-0" />
                           Назад
                         </button>
                         <button
                           type="button"
                           disabled={!canGoStep3}
                           onClick={() => goTo(3)}
-                          className="flex items-center gap-2 rounded-xl bg-orange px-6 py-3 text-sm font-semibold text-graphite-deep transition-all duration-200 hover:enabled:scale-[1.03] disabled:cursor-not-allowed disabled:opacity-40"
+                          className="flex items-center gap-2 whitespace-nowrap rounded-xl bg-orange px-6 py-3 text-sm font-semibold text-graphite-deep transition-all duration-200 hover:enabled:scale-[1.03] disabled:cursor-not-allowed disabled:opacity-40"
                         >
                           Далее
-                          <ArrowRight className="h-4 w-4" />
+                          <ArrowRight className="h-4 w-4 shrink-0" />
                         </button>
                       </div>
                     </motion.div>
@@ -452,18 +460,18 @@ export default function BookingSection() {
                         <button
                           type="button"
                           onClick={() => goTo(2)}
-                          className="flex items-center gap-2 rounded-xl border border-white/15 px-6 py-3 text-sm font-semibold text-offwhite transition-colors duration-200 hover:bg-white/5"
+                          className="flex items-center gap-2 whitespace-nowrap rounded-xl border border-white/15 px-6 py-3 text-sm font-semibold text-offwhite transition-colors duration-200 hover:bg-white/5"
                         >
-                          <ArrowLeft className="h-4 w-4" />
+                          <ArrowLeft className="h-4 w-4 shrink-0" />
                           Назад
                         </button>
                         <button
                           type="button"
                           disabled={!canSubmit}
                           onClick={handleSubmit}
-                          className="flex items-center gap-2 rounded-xl bg-orange px-6 py-3 text-sm font-semibold text-graphite-deep shadow-glow transition-all duration-200 hover:enabled:scale-[1.03] disabled:cursor-not-allowed disabled:opacity-40"
+                          className="flex items-center gap-2 whitespace-nowrap rounded-xl bg-orange px-6 py-3 text-sm font-semibold text-graphite-deep shadow-glow transition-all duration-200 hover:enabled:scale-[1.03] disabled:cursor-not-allowed disabled:opacity-40"
                         >
-                          <CalendarCheck className="h-4 w-4" />
+                          <CalendarCheck className="h-4 w-4 shrink-0" />
                           Отправить заявку
                         </button>
                       </div>
@@ -473,8 +481,7 @@ export default function BookingSection() {
               </div>
             </>
           )}
-        </FadeIn>
-      </div>
-    </section>
+      </FadeIn>
+    </Section>
   );
 }

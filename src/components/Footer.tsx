@@ -11,8 +11,16 @@ const seoLinks = [
 
 export default function Footer() {
   return (
-    <footer className="border-t border-white/10 bg-graphite-deep">
-      <div className="mx-auto grid max-w-7xl gap-10 px-4 py-14 sm:px-6 lg:grid-cols-4 lg:px-8">
+    <footer className="panel-deep relative overflow-hidden border-t border-white/10">
+      <span
+        aria-hidden
+        className="pointer-events-none absolute inset-0 bg-perf [mask-image:radial-gradient(120%_100%_at_50%_0%,#000_0%,transparent_75%)]"
+      />
+      <span
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 top-0 h-[60%] bg-spotlight"
+      />
+      <div className="relative mx-auto grid max-w-7xl gap-10 px-4 py-14 sm:px-6 lg:grid-cols-4 lg:px-8">
         <div className="lg:col-span-2">
           <Link href="/" className="flex items-center gap-3">
             <Image
@@ -100,7 +108,7 @@ export default function Footer() {
         </div>
       </div>
 
-      <div className="border-t border-white/5">
+      <div className="relative border-t border-white/5">
         <div className="mx-auto flex max-w-7xl flex-col gap-2 px-4 py-5 text-xs text-muted/70 sm:flex-row sm:items-center sm:justify-between sm:px-6 lg:px-8">
           <p>© {new Date().getFullYear()} {site.fullName}, {site.city}. Все права защищены.</p>
           <p>Сайт не является публичной офертой.</p>

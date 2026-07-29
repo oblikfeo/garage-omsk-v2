@@ -10,6 +10,7 @@ import {
   type MotionValue,
 } from "framer-motion";
 import { steps } from "@/lib/data";
+import Section from "./Section";
 import SectionHeading from "./SectionHeading";
 
 const TRAVEL_DURATION = 9;
@@ -61,7 +62,7 @@ function StepTile({
 
       <motion.div
         style={{ backgroundColor: cardBg, borderColor: cardBorder, boxShadow: cardShadow }}
-        className="z-10 h-full flex-1 rounded-2xl border p-5"
+        className="card-metal z-10 h-full flex-1 rounded-2xl border p-5"
       >
         <motion.span
           style={{ color: numberColor }}
@@ -98,7 +99,7 @@ export default function HowItWorks() {
   const dotLeft = useTransform(progress, (v) => `${v}%`);
 
   return (
-    <section id="how" className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
+    <Section id="how" pattern="blueprint">
       <SectionHeading
         eyebrow="Как это работает"
         title="От онлайн-записи до завершения работ"
@@ -141,6 +142,6 @@ export default function HowItWorks() {
           ))}
         </ol>
       </div>
-    </section>
+    </Section>
   );
 }

@@ -1,5 +1,14 @@
-import { ArrowUpDown, CircleDot, PlusCircle, Wrench, Check } from "lucide-react";
+import {
+  ArrowUpDown,
+  CircleDot,
+  Droplets,
+  MessageCircle,
+  Wrench,
+  Check,
+  Wind,
+} from "lucide-react";
 import { addonServices, services } from "@/lib/data";
+import Section from "./Section";
 import SectionHeading from "./SectionHeading";
 import FadeIn from "./FadeIn";
 
@@ -10,9 +19,11 @@ const icons = {
   tire: CircleDot,
 };
 
+const addonIcons = [Wrench, Wind, Droplets, MessageCircle];
+
 export default function Services() {
   return (
-    <section id="services" className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
+    <Section id="services" pattern="perf">
       <SectionHeading
         eyebrow="Услуги"
         title="Аренда постов, подъёмников и оборудования"
@@ -26,7 +37,7 @@ export default function Services() {
             <FadeIn
               key={service.id}
               delay={i * 0.08}
-              className="group flex flex-col rounded-2xl border border-white/10 bg-surface p-6 transition-all duration-300 hover:-translate-y-1 hover:border-orange/40 hover:shadow-xl hover:shadow-black/20"
+              className="card-metal group flex flex-col rounded-2xl border border-white/10 bg-surface p-6 transition-all duration-300 hover:-translate-y-1 hover:border-orange/40 hover:shadow-xl hover:shadow-black/30"
             >
               <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-orange/10 text-orange transition-all duration-300 group-hover:scale-110 group-hover:bg-orange group-hover:text-graphite-deep">
                 <Icon className="h-6 w-6" />
@@ -50,29 +61,34 @@ export default function Services() {
         })}
       </div>
 
-      <FadeIn
-        delay={0.2}
-        className="mt-6 flex flex-col gap-5 rounded-2xl border border-white/10 bg-surface p-6 transition-colors duration-300 hover:border-blue/30 sm:flex-row sm:items-center"
-      >
-        <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-blue/10 text-blue">
-          <PlusCircle className="h-6 w-6" />
-        </div>
-        <div className="flex-1">
-          <h3 className="font-display text-base font-semibold text-offwhite">
+      <FadeIn delay={0.2} className="mt-8 sm:mt-10">
+        <div className="mb-4 flex items-center gap-3">
+          <span className="h-px flex-1 bg-white/10" />
+          <h3 className="shrink-0 font-display text-sm font-semibold uppercase tracking-[0.14em] text-muted">
             Дополнительные услуги
           </h3>
-          <div className="mt-3 flex flex-wrap gap-2">
-            {addonServices.map((a) => (
-              <span
-                key={a}
-                className="rounded-full border border-white/10 bg-graphite px-3.5 py-1.5 text-xs text-muted transition-colors duration-200 hover:border-blue/30 hover:text-offwhite"
+          <span className="h-px flex-1 bg-white/10" />
+        </div>
+
+        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          {addonServices.map((addon, i) => {
+            const Icon = addonIcons[i % addonIcons.length];
+            return (
+              <div
+                key={addon}
+                className="card-metal group flex items-start gap-3.5 rounded-2xl border border-white/10 bg-surface/80 p-4 transition-all duration-300 hover:-translate-y-0.5 hover:border-blue/35 hover:bg-surface"
               >
-                {a}
-              </span>
-            ))}
-          </div>
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-blue/10 text-blue transition-colors duration-300 group-hover:bg-blue group-hover:text-offwhite">
+                  <Icon className="h-[18px] w-[18px]" />
+                </div>
+                <p className="pt-1.5 text-sm leading-snug text-muted transition-colors duration-200 group-hover:text-offwhite">
+                  {addon}
+                </p>
+              </div>
+            );
+          })}
         </div>
       </FadeIn>
-    </section>
+    </Section>
   );
 }
