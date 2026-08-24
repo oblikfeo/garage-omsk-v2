@@ -134,7 +134,7 @@ export default function PlanViewer({
                 Схема бокса
               </p>
               <p className="truncate text-xs text-muted sm:text-sm">
-                Расстановка 8 постов · масштаб колёсиком или кнопками
+                Расстановка 6 постов · масштаб колёсиком или кнопками
               </p>
             </div>
 

@@ -9,13 +9,14 @@ import Faq from "@/components/Faq";
 import BookingSection from "@/components/BookingSection";
 import Contacts from "@/components/Contacts";
 import { site } from "@/lib/data";
+import { getSiteUrl } from "@/lib/site-url";
 
 export default function Home() {
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "AutomotiveBusiness",
     name: site.fullName,
-    image: "https://garage-omsk.example/logo.jpg",
+    image: `${getSiteUrl()}/logo.svg`,
     address: {
       "@type": "PostalAddress",
       streetAddress: site.address,
@@ -23,7 +24,7 @@ export default function Home() {
       addressCountry: "RU",
     },
     telephone: site.phone,
-    openingHours: "Mo-Su 08:00-23:00",
+    openingHours: site.hoursSchema,
     priceRange: "₽₽",
   };
 

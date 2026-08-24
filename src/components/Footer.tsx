@@ -22,22 +22,15 @@ export default function Footer() {
       />
       <div className="relative mx-auto grid max-w-7xl gap-10 px-4 py-14 sm:px-6 lg:grid-cols-4 lg:px-8">
         <div className="lg:col-span-2">
-          <Link href="/" className="flex items-center gap-3">
+          <Link href="/" className="inline-flex items-center">
             <Image
-              src="/logo.jpg"
+              src="/logo.svg"
               alt={`${site.fullName} — логотип`}
-              width={44}
-              height={44}
-              className="h-11 w-11 rounded-full object-cover ring-1 ring-white/10"
+              width={200}
+              height={42}
+              className="h-9 w-auto"
+              unoptimized
             />
-            <span className="flex flex-col leading-none">
-              <span className="font-display text-lg font-semibold tracking-wide text-offwhite">
-                ГАРАЖ
-              </span>
-              <span className="text-[10px] uppercase tracking-[0.18em] text-muted">
-                самообслуживания
-              </span>
-            </span>
           </Link>
           <p className="mt-4 max-w-sm text-sm leading-relaxed text-muted">
             Почасовая и посуточная аренда постов, подъёмников и шиномонтажного
@@ -46,11 +39,11 @@ export default function Footer() {
           </p>
           <div className="mt-5 flex gap-3">
             <a
-              href={site.whatsapp}
+              href={site.max}
               target="_blank"
               rel="noopener noreferrer"
               className="flex h-10 w-10 items-center justify-center rounded-lg border border-white/10 text-muted transition-all duration-200 hover:-translate-y-0.5 hover:border-orange/40 hover:text-orange"
-              aria-label="Написать в WhatsApp"
+              aria-label="Написать в MAX"
             >
               <MessageCircle className="h-[18px] w-[18px]" />
             </a>

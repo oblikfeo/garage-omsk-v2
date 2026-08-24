@@ -20,7 +20,7 @@ const stats = [
     label: `${site.posts} постов`,
     sub: "и подъёмников в боксе",
   },
-  { icon: CalendarCheck, label: "08:00–23:00", sub: "без выходных" },
+  { icon: CalendarCheck, label: "09:00–19:00", sub: "без выходных" },
 ];
 
 const container = {
@@ -54,11 +54,7 @@ export default function Hero() {
       />
 
       <div className="relative mx-auto grid max-w-7xl items-center gap-10 px-4 py-12 sm:px-6 sm:py-16 lg:grid-cols-[1.05fr_0.95fr] lg:gap-8 lg:px-8 lg:py-24">
-        <motion.div
-          initial="hidden"
-          animate="show"
-          variants={container}
-        >
+        <motion.div initial="hidden" animate="show" variants={container}>
           <motion.h1
             variants={item}
             className="text-balance font-display text-[2.15rem] font-semibold leading-[1.12] tracking-tight text-offwhite sm:text-5xl lg:text-[3.4rem] lg:leading-[1.08]"
@@ -72,9 +68,9 @@ export default function Hero() {
             variants={item}
             className="mt-5 max-w-xl text-base leading-relaxed text-muted sm:mt-6 sm:text-lg"
           >
-            Профессиональный бокс с ямой, двумя типами подъёмников и
-            шиномонтажным станком. Платите только за время работы — от часа
-            до суток, без абонементов и переплат за сервис.
+            Профессиональный бокс с двумя типами подъёмников и шиномонтажным
+            станком. Платите только за время работы — от часа до суток, без
+            абонементов и переплат за сервис.
           </motion.p>
 
           <motion.div
@@ -97,19 +93,30 @@ export default function Hero() {
             </a>
           </motion.div>
 
-          <motion.div variants={item} className="mt-6 flex items-center gap-2 text-sm text-muted">
+          <motion.div
+            variants={item}
+            className="mt-6 flex items-center gap-2 text-sm text-muted"
+          >
             <MapPin className="h-4 w-4 shrink-0 text-orange" />
             {site.address}
           </motion.div>
 
-          <motion.dl variants={item} className="mt-9 grid grid-cols-3 gap-3 border-t border-white/10 pt-7 sm:mt-10 sm:gap-4 sm:pt-8">
+          <motion.dl
+            variants={item}
+            className="mt-9 grid grid-cols-3 gap-3 border-t border-white/10 pt-7 sm:mt-10 sm:gap-4 sm:pt-8"
+          >
             {stats.map(({ icon: Icon, label, sub }) => (
-              <div key={label} className="flex flex-col items-start gap-1.5 min-w-0">
+              <div
+                key={label}
+                className="flex min-w-0 flex-col items-start gap-1.5"
+              >
                 <Icon className="h-4 w-4 shrink-0 text-blue" />
                 <dt className="whitespace-nowrap font-display text-sm font-semibold leading-tight text-offwhite sm:text-lg">
                   {label}
                 </dt>
-                <dd className="text-[11px] leading-snug text-muted sm:text-xs">{sub}</dd>
+                <dd className="text-[11px] leading-snug text-muted sm:text-xs">
+                  {sub}
+                </dd>
               </div>
             ))}
           </motion.dl>
@@ -121,7 +128,7 @@ export default function Hero() {
           animate={{ opacity: 1, scale: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
         >
-          <figure className="group relative overflow-hidden rounded-3xl ring-1 ring-white/10 shadow-2xl shadow-black/40">
+          <figure className="group relative overflow-hidden rounded-3xl shadow-2xl shadow-black/40 ring-1 ring-white/10">
             <div className="relative aspect-[4/3]">
               <Image
                 src="/gallery/hall-lifts.jpg"
@@ -138,7 +145,7 @@ export default function Hero() {
 
             <figcaption className="absolute inset-x-0 bottom-0 flex flex-wrap items-end justify-between gap-3 p-4 sm:p-5">
               <span className="font-display text-sm font-semibold text-offwhite sm:text-base">
-                {site.posts} постов с подъёмниками
+                6 постов, 5 подъёмников, шиномонтаж
                 <span className="mt-0.5 block text-xs font-normal text-muted">
                   {site.address}
                 </span>

@@ -41,6 +41,10 @@ export const metadata: Metadata = {
     locale: "ru_RU",
     type: "website",
   },
+  icons: {
+    icon: [{ url: "/favicon.svg", type: "image/svg+xml" }],
+    apple: [{ url: "/favicon.svg" }],
+  },
 };
 
 export default function RootLayout({

@@ -37,25 +37,18 @@ export default function Header() {
       <div className="mx-auto flex h-[68px] max-w-7xl items-center justify-between gap-4 px-4 sm:h-[72px] sm:px-6 lg:px-8">
         <Link
           href="/"
-          className="flex shrink-0 items-center gap-2.5 sm:gap-3"
+          className="flex shrink-0 items-center"
           onClick={() => setOpen(false)}
         >
           <Image
-            src="/logo.jpg"
+            src="/logo.svg"
             alt={`${site.fullName} — логотип`}
-            width={48}
-            height={48}
-            className="h-10 w-10 rounded-full object-cover ring-1 ring-white/10 sm:h-12 sm:w-12"
+            width={220}
+            height={46}
+            className="h-9 w-auto sm:h-10"
             priority
+            unoptimized
           />
-          <span className="flex flex-col leading-none">
-            <span className="font-display text-lg font-semibold tracking-wide text-offwhite sm:text-xl">
-              ГАРАЖ
-            </span>
-            <span className="text-[10px] uppercase tracking-[0.16em] text-muted sm:text-[11px] sm:tracking-[0.18em]">
-              самообслуживания
-            </span>
-          </span>
         </Link>
 
         <nav className="hidden items-center gap-6 xl:flex">

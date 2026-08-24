@@ -2,15 +2,22 @@ export const site = {
   name: "Гараж",
   fullName: "Гараж самообслуживания",
   city: "Омск",
-  posts: 8,
-  address: "г. Омск, ул. Заводская, 12А",
-  phone: "+7 (3812) 00-00-00",
-  phoneHref: "+73812000000",
+  posts: 6,
+  address: "г. Омск, ул. Заводская, 1",
+  phone: "+7 (962) 055-00-70",
+  phoneHref: "+79620550070",
   email: "info@garage-omsk.ru",
-  hours: "Ежедневно, 08:00–23:00",
-  telegram: "https://t.me/garage_omsk",
-  whatsapp: "https://wa.me/73812000000",
-  mapsUrl: "https://yandex.ru/maps/-/CDtXxxXX",
+  hours: "Ежедневно, 09:00–19:00",
+  hoursSchema: "Mo-Su 09:00-19:00",
+  telegram: "https://t.me/dkovko",
+  max: "https://max.ru/u/f9LHodD0cOICv2J9Twqra9XM2wMd_hKKHFWXlUuChoQkAFA1LdfyM-74eA4",
+  // Search by address — not a placeholder short link
+  mapsUrl:
+    "https://yandex.ru/maps/?text=%D0%9E%D0%BC%D1%81%D0%BA%2C%20%D1%83%D0%BB%D0%B8%D1%86%D0%B0%20%D0%97%D0%B0%D0%B2%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F%2C%201",
+  // Opens Yandex Maps route builder with destination prefilled
+  mapsRouteUrl:
+    "https://yandex.ru/maps/?rtext=~%D0%9E%D0%BC%D1%81%D0%BA%2C%20%D1%83%D0%BB%D0%B8%D1%86%D0%B0%20%D0%97%D0%B0%D0%B2%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F%2C%201&rtt=auto",
+  yclientsUrl: "https://n2392236.yclients.com",
 };
 
 export type ServiceId = "post" | "lift2" | "liftX" | "tire";
@@ -25,8 +32,8 @@ export const services: {
     id: "post",
     title: "Аренда поста",
     description:
-      "Рабочий пост с ямой или эстакадой для планового ТО, замены масла и ремонта подвески своими руками.",
-    bullets: ["Смотровая яма или эстакада", "Освещение и розетки 220В", "Слив и приём отработанного масла"],
+      "Рабочий пост для планового ТО, замены масла и ремонта подвески своими руками.",
+    bullets: ["Комплект инструмента и верстак", "Освещение и розетки 220В", "Слив и приём отработанного масла"],
   },
   {
     id: "lift2",
@@ -37,10 +44,10 @@ export const services: {
   },
   {
     id: "liftX",
-    title: "Подъёмник ножничный",
+    title: "Подъёмник 4-стоечный",
     description:
-      "Низкопрофильный ножничный подъёмник — быстрый доступ к колёсам и тормозной системе.",
-    bullets: ["Быстрый подъём", "Подходит для шиномонтажных работ", "Компактная рабочая зона"],
+      "Четырёхстоечный подъёмник 4 т под сход-развал — удобно для геометрии колёс и работ с ходовой.",
+    bullets: ["Грузоподъёмность до 4 т", "Площадка под сход-развал", "Инструктаж перед подъёмом"],
   },
   {
     id: "tire",
@@ -62,7 +69,7 @@ export const gallery: GalleryItem[] = [
   {
     src: "/gallery/hall-lifts.jpg",
     alt: "Бокс СТО самообслуживания с рядом двухстоечных подъёмников",
-    title: "Бокс на 8 постов",
+    title: "Бокс на 6 постов",
     caption:
       "Просторный отапливаемый бокс: двухстоечные подъёмники, широкий проезд и яркий свет на каждом посту.",
   },
@@ -104,9 +111,9 @@ export type PriceRow = {
 };
 
 export const priceList: PriceRow[] = [
-  { id: "post", service: "Пост (яма / эстакада)", hour: 400, day: 2500 },
+  { id: "post", service: "Пост без подъёмника", hour: 400, day: 2500 },
   { id: "lift2", service: "Подъёмник 2-стоечный", hour: 600, day: 3800 },
-  { id: "liftX", service: "Подъёмник ножничный", hour: 550, day: 3500 },
+  { id: "liftX", service: "Подъёмник 4-стоечный", hour: 550, day: 3500 },
   { id: "tire", service: "Шиномонтажный станок", hour: 500, day: 3000 },
   { service: "Комплект инструмента", hour: 200, day: 900 },
 ];
@@ -194,6 +201,6 @@ export const testimonials = [
   {
     name: "Дмитрий К.",
     car: "Nissan X-Trail",
-    text: "Брал яму на сутки для полной замены подвески. Место чистое, освещение хорошее, розетки есть. Обязательно вернусь ещё.",
+    text: "Брал пост на сутки для полной замены подвески. Место чистое, освещение хорошее, розетки есть. Обязательно вернусь ещё.",
   },
 ];

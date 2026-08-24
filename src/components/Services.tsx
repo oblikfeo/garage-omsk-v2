@@ -1,6 +1,7 @@
 import {
   ArrowUpDown,
   CircleDot,
+  Columns3,
   Droplets,
   MessageCircle,
   Wrench,
@@ -15,7 +16,7 @@ import FadeIn from "./FadeIn";
 const icons = {
   post: Wrench,
   lift2: ArrowUpDown,
-  liftX: ArrowUpDown,
+  liftX: Columns3,
   tire: CircleDot,
 };
 
@@ -27,7 +28,7 @@ export default function Services() {
       <SectionHeading
         eyebrow="Услуги"
         title="Аренда постов, подъёмников и оборудования"
-        description="Выбирайте рабочее место под задачу — от простой ямы до шиномонтажного станка. Всё оборудование обслуживается и проверяется ежедневно."
+        description="Выбирайте рабочее место под задачу — от поста до шиномонтажного станка. Всё оборудование обслуживается и проверяется ежедневно."
       />
 
       <div className="mt-10 grid gap-4 sm:mt-12 sm:grid-cols-2 sm:gap-5 lg:grid-cols-4">
