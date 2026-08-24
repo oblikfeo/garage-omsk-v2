@@ -1,12 +1,14 @@
 import { AlertTriangle, Camera, ShieldCheck, UserCheck } from "lucide-react";
-import { safetyRules } from "@/lib/data";
+import { getContent } from "@/lib/content";
 import Section from "./Section";
 import SectionHeading from "./SectionHeading";
 import FadeIn from "./FadeIn";
 
 const icons = [UserCheck, Camera, ShieldCheck, AlertTriangle];
 
-export default function Safety() {
+export default async function Safety() {
+  const { safetyRules } = await getContent();
+
   return (
     <Section id="safety" variant="deep" pattern="tread">
       <SectionHeading

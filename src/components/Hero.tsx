@@ -11,17 +11,8 @@ import {
   ShieldCheck,
   Timer,
 } from "lucide-react";
-import { site } from "@/lib/data";
-
-const stats = [
-  { icon: Timer, label: "от 1 часа", sub: "почасовая аренда" },
-  {
-    icon: ShieldCheck,
-    label: `${site.posts} постов`,
-    sub: "и подъёмников в боксе",
-  },
-  { icon: CalendarCheck, label: "09:00–19:00", sub: "без выходных" },
-];
+import { site as defaultSite } from "@/lib/data";
+import type { SiteInfo } from "@/lib/content-types";
 
 const container = {
   hidden: {},
@@ -37,7 +28,17 @@ const item = {
   },
 };
 
-export default function Hero() {
+export default function Hero({ site = defaultSite }: { site?: SiteInfo }) {
+  const stats = [
+    { icon: Timer, label: "от 1 часа", sub: "почасовая аренда" },
+    {
+      icon: ShieldCheck,
+      label: `${site.posts} постов`,
+      sub: "и подъёмников в боксе",
+    },
+    { icon: CalendarCheck, label: "09:00–19:00", sub: "без выходных" },
+  ];
+
   return (
     <section className="relative overflow-hidden bg-[#16191c]">
       <span

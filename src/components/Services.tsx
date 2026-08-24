@@ -8,7 +8,7 @@ import {
   Check,
   Wind,
 } from "lucide-react";
-import { addonServices, services } from "@/lib/data";
+import { getContent } from "@/lib/content";
 import Section from "./Section";
 import SectionHeading from "./SectionHeading";
 import FadeIn from "./FadeIn";
@@ -22,7 +22,9 @@ const icons = {
 
 const addonIcons = [Wrench, Wind, Droplets, MessageCircle];
 
-export default function Services() {
+export default async function Services() {
+  const { addonServices, services } = await getContent();
+
   return (
     <Section id="services" pattern="perf">
       <SectionHeading
@@ -33,7 +35,7 @@ export default function Services() {
 
       <div className="mt-10 grid gap-4 sm:mt-12 sm:grid-cols-2 sm:gap-5 lg:grid-cols-4">
         {services.map((service, i) => {
-          const Icon = icons[service.id];
+          const Icon = icons[service.id as keyof typeof icons] ?? Wrench;
           return (
             <FadeIn
               key={service.id}

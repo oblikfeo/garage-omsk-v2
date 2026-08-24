@@ -10,7 +10,8 @@ import {
   Map,
   X,
 } from "lucide-react";
-import { gallery } from "@/lib/data";
+import { gallery as defaultGallery } from "@/lib/data";
+import type { GalleryItem } from "@/lib/content-types";
 import Section from "./Section";
 import SectionHeading from "./SectionHeading";
 import FadeIn from "./FadeIn";
@@ -23,7 +24,8 @@ const tileSpans = [
   "lg:col-span-1",
 ];
 
-export default function Gallery() {
+export default function Gallery({ items = defaultGallery }: { items?: GalleryItem[] }) {
+  const gallery = items;
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const [planOpen, setPlanOpen] = useState(false);
   const isOpen = openIndex !== null;
@@ -36,7 +38,7 @@ export default function Gallery() {
           ? current
           : (current + step + gallery.length) % gallery.length
       ),
-    []
+    [gallery.length]
   );
 
   useEffect(() => {
@@ -73,7 +75,7 @@ export default function Gallery() {
           <FadeIn
             key={photo.src}
             delay={i * 0.07}
-            className={`${tileSpans[i]} min-h-0`}
+            className={`${tileSpans[i % tileSpans.length]} min-h-0`}
           >
             <button
               type="button"

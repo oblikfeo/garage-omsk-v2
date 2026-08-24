@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { MapPin, MessageCircle, Phone, Send } from "lucide-react";
-import { site } from "@/lib/data";
+import { getContent } from "@/lib/content";
 
 const seoLinks = [
   { href: "/sto-samoobsluzhivaniya-omsk", label: "СТО самообслуживания в Омске" },
@@ -9,7 +9,9 @@ const seoLinks = [
   { href: "/arenda-podyomnika-omsk", label: "Аренда подъёмника в Омске" },
 ];
 
-export default function Footer() {
+export default async function Footer() {
+  const { site } = await getContent();
+
   return (
     <footer className="panel-deep relative overflow-hidden border-t border-white/10">
       <span

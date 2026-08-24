@@ -1,10 +1,12 @@
 import Link from "next/link";
-import { priceList } from "@/lib/data";
+import { getContent } from "@/lib/content";
 import Section from "./Section";
 import SectionHeading from "./SectionHeading";
 import FadeIn from "./FadeIn";
 
-export default function PriceList() {
+export default async function PriceList() {
+  const { priceList } = await getContent();
+
   return (
     <Section id="prices" variant="light" pattern="blueprint">
       <SectionHeading

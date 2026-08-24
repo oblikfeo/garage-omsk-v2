@@ -40,3 +40,8 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# content and uploads written at runtime by the admin panel
+/data
+/public/uploads/*
+!/public/uploads/.gitkeep

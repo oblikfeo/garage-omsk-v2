@@ -5,7 +5,8 @@ import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { Menu, Phone, X } from "lucide-react";
-import { site } from "@/lib/data";
+import { site as defaultSite } from "@/lib/data";
+import type { SiteInfo } from "@/lib/content-types";
 
 const navLinks = [
   { href: "/#services", label: "Услуги" },
@@ -17,7 +18,7 @@ const navLinks = [
   { href: "/#contacts", label: "Контакты" },
 ];
 
-export default function Header() {
+export default function Header({ site = defaultSite }: { site?: SiteInfo }) {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 

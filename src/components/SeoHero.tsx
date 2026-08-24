@@ -1,8 +1,8 @@
 import Link from "next/link";
 import { CalendarCheck, MapPin, Phone } from "lucide-react";
-import { site } from "@/lib/data";
+import { getContent } from "@/lib/content";
 
-export default function SeoHero({
+export default async function SeoHero({
   eyebrow,
   h1,
   intro,
@@ -13,6 +13,8 @@ export default function SeoHero({
   intro: string;
   bullets: string[];
 }) {
+  const { site } = await getContent();
+
   return (
     <section className="panel-graphite relative overflow-hidden">
       <span

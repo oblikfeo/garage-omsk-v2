@@ -1,10 +1,12 @@
 import { Star } from "lucide-react";
-import { testimonials } from "@/lib/data";
+import { getContent } from "@/lib/content";
 import Section from "./Section";
 import SectionHeading from "./SectionHeading";
 import FadeIn from "./FadeIn";
 
-export default function Testimonials() {
+export default async function Testimonials() {
+  const { testimonials } = await getContent();
+
   return (
     <Section pattern="perf" watermark="5,0">
       <SectionHeading eyebrow="Отзывы" title="Что говорят клиенты" center />

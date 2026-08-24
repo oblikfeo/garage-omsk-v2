@@ -5,6 +5,7 @@ import HowItWorks from "@/components/HowItWorks";
 import SeoHero from "@/components/SeoHero";
 import Faq from "@/components/Faq";
 import Contacts from "@/components/Contacts";
+import { getContent } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "Гараж на час в Омске — почасовая аренда бокса с подъёмником",
@@ -28,7 +29,9 @@ const pageFaq = [
   },
 ];
 
-export default function GarazhNaChasOmsk() {
+export default async function GarazhNaChasOmsk() {
+  const { steps } = await getContent();
+
   return (
     <>
       <SeoHero
@@ -39,7 +42,7 @@ export default function GarazhNaChasOmsk() {
       />
       <Services />
       <PriceList />
-      <HowItWorks />
+      <HowItWorks items={steps} />
       <Faq id="faq-garazh" title="Вопросы о гараже на час" items={pageFaq} />
       <Contacts />
     </>

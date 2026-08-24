@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { site } from "@/lib/data";
+import { getContent } from "@/lib/content";
+import type { SiteInfo } from "@/lib/content-types";
 
 export const metadata: Metadata = {
   title: "Политика обработки персональных данных",
@@ -8,7 +9,8 @@ export const metadata: Metadata = {
   robots: { index: false, follow: true },
 };
 
-const sections = [
+function buildSections(site: SiteInfo) {
+  return [
   {
     title: "1. Общие положения",
     text: `Настоящая политика определяет порядок обработки персональных данных пользователей сайта ${site.fullName} (далее — «Оператор»). Используя формы онлайн-записи на сайте, пользователь даёт согласие на обработку своих персональных данных на условиях, изложенных ниже.`,
@@ -37,9 +39,13 @@ const sections = [
     title: "7. Контакты",
     text: `По вопросам обработки персональных данных обращайтесь по телефону ${site.phone} или на почту ${site.email}.`,
   },
-];
+  ];
+}
 
-export default function PrivacyPolicyPage() {
+export default async function PrivacyPolicyPage() {
+  const { site } = await getContent();
+  const sections = buildSections(site);
+
   return (
     <section className="mx-auto max-w-3xl px-4 py-16 sm:px-6 lg:px-8">
       <span className="text-xs font-semibold uppercase tracking-[0.18em] text-orange">
