@@ -9,7 +9,8 @@ import {
   useTransform,
   type MotionValue,
 } from "framer-motion";
-import { steps } from "@/lib/data";
+import { steps as defaultSteps } from "@/lib/data";
+import type { TitleText } from "@/lib/content-types";
 import Section from "./Section";
 import SectionHeading from "./SectionHeading";
 
@@ -22,7 +23,7 @@ function StepTile({
   total,
   progress,
 }: {
-  step: (typeof steps)[number];
+  step: TitleText;
   index: number;
   total: number;
   progress: MotionValue<number>;
@@ -79,7 +80,8 @@ function StepTile({
   );
 }
 
-export default function HowItWorks() {
+export default function HowItWorks({ items = defaultSteps }: { items?: TitleText[] }) {
+  const steps = items;
   const sectionRef = useRef<HTMLDivElement>(null);
   const inView = useInView(sectionRef, { amount: 0.4 });
   const progress = useMotionValue(0);

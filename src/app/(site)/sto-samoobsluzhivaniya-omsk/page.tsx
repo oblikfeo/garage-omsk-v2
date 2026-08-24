@@ -5,6 +5,7 @@ import HowItWorks from "@/components/HowItWorks";
 import SeoHero from "@/components/SeoHero";
 import Faq from "@/components/Faq";
 import Contacts from "@/components/Contacts";
+import { getContent } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "СТО самообслуживания в Омске — аренда постов и подъёмников",
@@ -28,7 +29,9 @@ const pageFaq = [
   },
 ];
 
-export default function StoSamoobsluzhivaniyaOmsk() {
+export default async function StoSamoobsluzhivaniyaOmsk() {
+  const { steps } = await getContent();
+
   return (
     <>
       <SeoHero
@@ -39,7 +42,7 @@ export default function StoSamoobsluzhivaniyaOmsk() {
       />
       <Services />
       <PriceList />
-      <HowItWorks />
+      <HowItWorks items={steps} />
       <Faq id="faq-sto" title="Вопросы о СТО самообслуживания" items={pageFaq} />
       <Contacts />
     </>

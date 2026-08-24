@@ -5,6 +5,7 @@ import HowItWorks from "@/components/HowItWorks";
 import SeoHero from "@/components/SeoHero";
 import Faq from "@/components/Faq";
 import Contacts from "@/components/Contacts";
+import { getContent } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "Аренда подъёмника в Омске — почасово и посуточно",
@@ -28,7 +29,9 @@ const pageFaq = [
   },
 ];
 
-export default function ArendaPodyomnikaOmsk() {
+export default async function ArendaPodyomnikaOmsk() {
+  const { steps } = await getContent();
+
   return (
     <>
       <SeoHero
@@ -39,7 +42,7 @@ export default function ArendaPodyomnikaOmsk() {
       />
       <Services />
       <PriceList />
-      <HowItWorks />
+      <HowItWorks items={steps} />
       <Faq id="faq-podyomnik" title="Вопросы об аренде подъёмника" items={pageFaq} />
       <Contacts />
     </>

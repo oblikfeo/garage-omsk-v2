@@ -1,10 +1,12 @@
 import { Clock, MapPin, MessageCircle, Phone, Send } from "lucide-react";
-import { site } from "@/lib/data";
+import { getContent } from "@/lib/content";
 import Section from "./Section";
 import SectionHeading from "./SectionHeading";
 import FadeIn from "./FadeIn";
 
-export default function Contacts() {
+export default async function Contacts() {
+  const { site } = await getContent();
+
   return (
     <Section id="contacts" variant="light" pattern="perf">
       <SectionHeading

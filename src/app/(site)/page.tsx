@@ -8,10 +8,11 @@ import Testimonials from "@/components/Testimonials";
 import Faq from "@/components/Faq";
 import BookingSection from "@/components/BookingSection";
 import Contacts from "@/components/Contacts";
-import { site } from "@/lib/data";
+import { getContent } from "@/lib/content";
 import { getSiteUrl } from "@/lib/site-url";
 
-export default function Home() {
+export default async function Home() {
+  const { site, gallery, steps, faq } = await getContent();
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "AutomotiveBusiness",
@@ -34,15 +35,15 @@ export default function Home() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <Hero />
+      <Hero site={site} />
       <Services />
       <PriceList />
-      <Gallery />
-      <HowItWorks />
+      <Gallery items={gallery} />
+      <HowItWorks items={steps} />
       <Safety />
       <Testimonials />
       <BookingSection />
-      <Faq />
+      <Faq items={faq} />
       <Contacts />
     </>
   );

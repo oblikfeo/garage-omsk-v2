@@ -1,9 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Oswald } from "next/font/google";
 import "./globals.css";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
-import { site } from "@/lib/data";
+import { getContent } from "@/lib/content";
 import { getSiteUrl } from "@/lib/site-url";
 
 const inter = Inter({
@@ -19,7 +17,10 @@ const oswald = Oswald({
   weight: ["400", "500", "600", "700"],
 });
 
-export const metadata: Metadata = {
+export async function generateMetadata(): Promise<Metadata> {
+  const { site } = await getContent();
+
+  return {
   metadataBase: new URL(getSiteUrl()),
   title: {
     default: `${site.fullName} в Омске — аренда постов, подъёмников и шиномонтажа`,
@@ -45,7 +46,8 @@ export const metadata: Metadata = {
     icon: [{ url: "/favicon.svg", type: "image/svg+xml" }],
     apple: [{ url: "/favicon.svg" }],
   },
-};
+  };
+}
 
 export default function RootLayout({
   children,
@@ -55,9 +57,7 @@ export default function RootLayout({
   return (
     <html lang="ru" className={`${inter.variable} ${oswald.variable}`}>
       <body className="flex min-h-dvh flex-col bg-graphite font-sans text-offwhite antialiased">
-        <Header />
-        <main className="flex-1">{children}</main>
-        <Footer />
+        {children}
       </body>
     </html>
   );
