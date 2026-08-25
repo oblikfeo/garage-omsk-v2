@@ -359,6 +359,14 @@ const SITE_GROUPS: {
     ],
   },
   {
+    title: "Реквизиты",
+    fields: [
+      { key: "legalName", label: "Юридическое лицо", hint: "Показывается в подвале сайта" },
+      { key: "inn", label: "ИНН" },
+      { key: "ogrn", label: "ОГРН" },
+    ],
+  },
+  {
     title: "Контакты",
     fields: [
       { key: "phone", label: "Телефон (как показывать)" },

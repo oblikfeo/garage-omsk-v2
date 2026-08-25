@@ -2,6 +2,9 @@ export type SiteInfo = {
   name: string;
   fullName: string;
   city: string;
+  legalName: string;
+  inn: string;
+  ogrn: string;
   posts: number;
   address: string;
   phone: string;

@@ -34,11 +34,11 @@ export default async function Footer() {
               unoptimized
             />
           </Link>
-          <p className="mt-4 max-w-sm text-sm leading-relaxed text-muted">
-            Почасовая и посуточная аренда постов, подъёмников и шиномонтажного
-            оборудования в {site.city}. Ремонтируйте автомобиль сами — быстро,
-            безопасно и по понятным ценам.
-          </p>
+          <div className="mt-4 max-w-sm space-y-1 text-sm leading-relaxed text-muted">
+            <p className="font-semibold text-offwhite">{site.legalName}</p>
+            <p>ИНН: {site.inn}</p>
+            <p>ОГРН: {site.ogrn}</p>
+          </div>
           <div className="mt-5 flex gap-3">
             <a
               href={site.max}
