@@ -19,6 +19,19 @@ export type SiteInfo = {
   yclientsUrl: string;
 };
 
+/** One of the two messages the corner banner can show. */
+export type NoticeMessage = { title: string; text: string };
+
+/** Live-chat style banner in the corner of the site. */
+export type SiteNotice = {
+  enabled: boolean;
+  /** work = оранжевая "идут работы", live = зелёная "всё работает" */
+  tone: "work" | "live";
+  /** Each tone keeps its own wording, so flipping the switch flips the text. */
+  work: NoticeMessage;
+  live: NoticeMessage;
+};
+
 export type Service = {
   id: string;
   title: string;
@@ -46,6 +59,7 @@ export type Testimonial = { name: string; car: string; text: string };
 
 export type SiteContent = {
   site: SiteInfo;
+  notice: SiteNotice;
   services: Service[];
   gallery: GalleryItem[];
   addonServices: string[];

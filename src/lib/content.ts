@@ -11,6 +11,7 @@ import {
   priceList as defaultPriceList,
   safetyRules as defaultSafetyRules,
   services as defaultServices,
+  notice as defaultNotice,
   site as defaultSite,
   steps as defaultSteps,
   testimonials as defaultTestimonials,
@@ -20,6 +21,7 @@ export * from "./content-types";
 
 export const defaultContent: SiteContent = {
   site: defaultSite,
+  notice: defaultNotice,
   services: defaultServices,
   gallery: defaultGallery,
   addonServices: defaultAddonServices,
@@ -48,6 +50,9 @@ const str = (value: unknown, fallback: string): string =>
 
 const num = (value: unknown, fallback: number): number =>
   typeof value === "number" && Number.isFinite(value) ? value : fallback;
+
+const bool = (value: unknown, fallback: boolean): boolean =>
+  typeof value === "boolean" ? value : fallback;
 
 const strList = (value: unknown, fallback: string[]): string[] =>
   Array.isArray(value) ? value.filter((v): v is string => typeof v === "string") : fallback;
@@ -88,6 +93,32 @@ export function normalizeContent(stored: unknown): SiteContent {
       mapsRouteUrl: str(storedSite.mapsRouteUrl, defaultSite.mapsRouteUrl),
       yclientsUrl: str(storedSite.yclientsUrl, defaultSite.yclientsUrl),
     },
+
+    notice: (() => {
+      const storedNotice = (typeof raw.notice === "object" && raw.notice !== null
+        ? raw.notice
+        : {}) as Record<string, unknown>;
+
+      const message = (key: "work" | "live") => {
+        const stored = (typeof storedNotice[key] === "object" && storedNotice[key] !== null
+          ? storedNotice[key]
+          : {}) as Record<string, unknown>;
+
+        return {
+          title: str(stored.title, defaultNotice[key].title),
+          text: str(stored.text, defaultNotice[key].text),
+        };
+      };
+
+      return {
+        enabled: bool(storedNotice.enabled, defaultNotice.enabled),
+        tone: storedNotice.tone === "live" || storedNotice.tone === "work"
+          ? storedNotice.tone
+          : defaultNotice.tone,
+        work: message("work"),
+        live: message("live"),
+      };
+    })(),
     services: list(
       raw.services,
       (row) => ({

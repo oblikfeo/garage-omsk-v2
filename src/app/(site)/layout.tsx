@@ -1,5 +1,6 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import SiteNoticeWidget from "@/components/SiteNotice";
 import { getContent } from "@/lib/content";
 
 /**
@@ -13,13 +14,14 @@ export const revalidate = 60;
 export default async function SiteLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
-  const { site } = await getContent();
+  const { site, notice } = await getContent();
 
   return (
     <>
       <Header site={site} />
       <main className="flex-1">{children}</main>
       <Footer />
+      <SiteNoticeWidget notice={notice} />
     </>
   );
 }

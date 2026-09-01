@@ -11,6 +11,7 @@ import {
   LogOut,
   Plus,
   RotateCcw,
+  Power,
   Save,
   Trash2,
   Upload,
@@ -23,6 +24,7 @@ import type {
   Service,
   SiteContent,
   SiteInfo,
+  SiteNotice,
   Testimonial,
   TitleText,
 } from "@/lib/content-types";
@@ -319,6 +321,7 @@ function ImagePicker({
 
 type TabId =
   | "site"
+  | "notice"
   | "services"
   | "priceList"
   | "gallery"
@@ -330,6 +333,7 @@ type TabId =
 
 const TABS: { id: TabId; label: string }[] = [
   { id: "site", label: "Контакты" },
+  { id: "notice", label: "Плашка" },
   { id: "services", label: "Услуги" },
   { id: "priceList", label: "Прайс" },
   { id: "gallery", label: "Галерея" },
@@ -433,6 +437,26 @@ export default function AdminEditor({
       site: {
         ...current.site,
         [key]: key === "posts" ? Number(value) || 0 : value,
+      },
+    }));
+  }
+
+  function patchNotice(patch: Partial<SiteNotice>) {
+    setContent((current) => ({
+      ...current,
+      notice: { ...current.notice, ...patch },
+    }));
+  }
+
+  function patchMessage(
+    tone: "work" | "live",
+    patch: { title?: string; text?: string }
+  ) {
+    setContent((current) => ({
+      ...current,
+      notice: {
+        ...current.notice,
+        [tone]: { ...current.notice[tone], ...patch },
       },
     }));
   }
@@ -586,6 +610,140 @@ export default function AdminEditor({
               </section>
             ))}
           </div>
+        )}
+
+        {tab === "notice" && (
+          <section className="rounded-2xl border border-white/10 bg-surface p-5 sm:p-6">
+            <h2 className="font-display text-sm font-semibold uppercase tracking-wider text-offwhite">
+              Плашка-объявление
+            </h2>
+            <p className="mt-1 text-xs text-steel">
+              Окошко в правом нижнем углу сайта, как у онлайн-чата. Посетитель
+              может его свернуть — тогда останется маленькая кнопка. Если
+              поменять заголовок, окно снова раскроется у всех.
+            </p>
+
+            <button
+              type="button"
+              onClick={() => patchNotice({ enabled: !content.notice.enabled })}
+              className={`mt-5 flex w-full items-center gap-3 rounded-xl border px-4 py-3.5 text-left transition-colors ${
+                content.notice.enabled
+                  ? "border-orange/40 bg-orange/10"
+                  : "border-white/10 bg-graphite"
+              }`}
+            >
+              <span
+                className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-lg ${
+                  content.notice.enabled
+                    ? "bg-orange text-graphite-deep"
+                    : "bg-white/5 text-steel"
+                }`}
+              >
+                <Power className="h-4 w-4" />
+              </span>
+              <span className="min-w-0 flex-1">
+                <span className="block text-sm font-semibold text-offwhite">
+                  {content.notice.enabled ? "Плашка показывается" : "Плашка скрыта"}
+                </span>
+                <span className="block text-xs text-steel">
+                  Нажмите, чтобы {content.notice.enabled ? "убрать её с сайта" : "показать её на сайте"}
+                </span>
+              </span>
+              <span
+                className={`relative h-6 w-11 shrink-0 rounded-full transition-colors ${
+                  content.notice.enabled ? "bg-orange" : "bg-white/15"
+                }`}
+              >
+                <span
+                  className={`absolute top-0.5 h-5 w-5 rounded-full bg-offwhite transition-all ${
+                    content.notice.enabled ? "left-[22px]" : "left-0.5"
+                  }`}
+                />
+              </span>
+            </button>
+
+            <div className="mt-5">
+              <span className="text-xs font-semibold uppercase tracking-wider text-muted">
+                Цвет
+              </span>
+              <div className="mt-1.5 grid gap-2 sm:grid-cols-2">
+                {(
+                  [
+                    { tone: "work", label: "Оранжевая", hint: "идут работы, заявки закрыты", dot: "bg-orange" },
+                    { tone: "live", label: "Зелёная", hint: "всё работает, запись открыта", dot: "bg-green" },
+                  ] as const
+                ).map((option) => (
+                  <button
+                    key={option.tone}
+                    type="button"
+                    onClick={() => patchNotice({ tone: option.tone })}
+                    className={`flex items-center gap-3 rounded-xl border px-4 py-3 text-left transition-colors ${
+                      content.notice.tone === option.tone
+                        ? "border-white/30 bg-graphite"
+                        : "border-white/10 bg-graphite/50 hover:border-white/20"
+                    }`}
+                  >
+                    <span className={`h-3 w-3 shrink-0 rounded-full ${option.dot}`} />
+                    <span className="min-w-0">
+                      <span className="block text-sm font-semibold text-offwhite">
+                        {option.label}
+                      </span>
+                      <span className="block text-xs text-steel">{option.hint}</span>
+                    </span>
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div className="mt-5 space-y-4">
+              {(
+                [
+                  { tone: "work", label: "Оранжевая — идут работы", dot: "bg-orange" },
+                  { tone: "live", label: "Зелёная — всё работает", dot: "bg-green" },
+                ] as const
+              ).map((block) => (
+                <div
+                  key={block.tone}
+                  className={`rounded-xl border p-4 transition-colors ${
+                    content.notice.tone === block.tone
+                      ? "border-white/25 bg-graphite"
+                      : "border-white/10 bg-graphite/40"
+                  }`}
+                >
+                  <div className="mb-3 flex items-center gap-2.5">
+                    <span className={`h-2.5 w-2.5 shrink-0 rounded-full ${block.dot}`} />
+                    <span className="text-xs font-semibold uppercase tracking-wider text-muted">
+                      {block.label}
+                    </span>
+                    {content.notice.tone === block.tone && (
+                      <span className="ml-auto shrink-0 rounded-full bg-white/10 px-2.5 py-1 text-[11px] font-semibold text-offwhite">
+                        показывается сейчас
+                      </span>
+                    )}
+                  </div>
+
+                  <div className="space-y-3">
+                    <Field
+                      label="Заголовок"
+                      value={content.notice[block.tone].title}
+                      onChange={(title) => patchMessage(block.tone, { title })}
+                    />
+                    <Area
+                      label="Текст"
+                      rows={4}
+                      value={content.notice[block.tone].text}
+                      onChange={(text) => patchMessage(block.tone, { text })}
+                    />
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <p className="mt-4 text-xs text-steel">
+              У зелёной плашки внизу появляется кнопка перехода к онлайн-записи.
+              У оранжевой кнопки нет — только текст.
+            </p>
+          </section>
         )}
 
         {tab === "services" && (

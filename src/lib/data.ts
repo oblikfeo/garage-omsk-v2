@@ -23,6 +23,19 @@ export const site = {
   yclientsUrl: "https://n2392236.yclients.com",
 };
 
+export const notice = {
+  enabled: true,
+  tone: "work" as "work" | "live",
+  work: {
+    title: "Приём заявок приостановлен",
+    text: "На сайте ведутся технические работы. Приводим в порядок данные о постах, оборудовании и расписании, поэтому онлайн-запись временно не принимает заявки.",
+  },
+  live: {
+    title: "Приём заявок открыт",
+    text: "Технические работы завершены. Онлайн-запись принимает заявки — выбирайте пост, дату и время на сайте.",
+  },
+};
+
 export type ServiceId = "post" | "lift2" | "liftX" | "tire";
 
 export const services: {
