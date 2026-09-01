@@ -18,53 +18,53 @@ export default async function Contacts() {
 
       <div className="mt-8 grid gap-5 sm:mt-10 sm:gap-6 lg:grid-cols-[0.9fr_1.1fr]">
           <div className="space-y-3 sm:space-y-4">
-            <FadeIn className="card-paper rounded-2xl border border-graphite/10 bg-offwhite p-5 transition-all duration-300 hover:-translate-y-0.5 hover:border-orange-dark/30 hover:shadow-lg">
-              <div className="flex items-center gap-3.5">
-                <MapPin className="h-5 w-5 shrink-0 text-orange-dark" />
-                <p className="min-w-0 font-semibold">{site.address}</p>
+            <FadeIn className="card-paper flex items-center gap-3.5 rounded-2xl border border-graphite/10 bg-offwhite p-5 transition-all duration-300 hover:-translate-y-0.5 hover:border-orange-dark/30 hover:shadow-lg">
+              <MapPin className="h-5 w-5 shrink-0 text-orange-dark" />
+              <div className="min-w-0">
+                <p className="font-semibold">{site.address}</p>
+                <a
+                  href={site.mapsUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-0.5 block text-sm text-blue underline underline-offset-2"
+                >
+                  Открыть на карте
+                </a>
               </div>
-              <a
-                href={site.mapsUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-1 block pl-[34px] text-sm text-blue underline underline-offset-2"
-              >
-                Открыть на карте
-              </a>
             </FadeIn>
 
-            <FadeIn delay={0.05} className="card-paper rounded-2xl border border-graphite/10 bg-offwhite p-5 transition-all duration-300 hover:-translate-y-0.5 hover:border-orange-dark/30 hover:shadow-lg">
-              <div className="flex items-center gap-3.5">
-                <Clock className="h-5 w-5 shrink-0 text-orange-dark" />
-                <p className="min-w-0 font-semibold">Режим работы</p>
+            <FadeIn delay={0.05} className="card-paper flex items-center gap-3.5 rounded-2xl border border-graphite/10 bg-offwhite p-5 transition-all duration-300 hover:-translate-y-0.5 hover:border-orange-dark/30 hover:shadow-lg">
+              <Clock className="h-5 w-5 shrink-0 text-orange-dark" />
+              <div className="min-w-0">
+                <p className="font-semibold">Режим работы</p>
+                <p className="mt-0.5 text-sm text-steel">{site.hours}</p>
               </div>
-              <p className="mt-1 pl-[34px] text-sm text-steel">{site.hours}</p>
             </FadeIn>
 
-            <FadeIn delay={0.1} className="card-paper rounded-2xl border border-graphite/10 bg-offwhite p-5 transition-all duration-300 hover:-translate-y-0.5 hover:border-orange-dark/30 hover:shadow-lg">
-              <div className="flex items-center gap-3.5">
-                <Phone className="h-5 w-5 shrink-0 text-orange-dark" />
-                <p className="min-w-0 font-semibold">Телефон администратора</p>
+            <FadeIn delay={0.1} className="card-paper flex items-center gap-3.5 rounded-2xl border border-graphite/10 bg-offwhite p-5 transition-all duration-300 hover:-translate-y-0.5 hover:border-orange-dark/30 hover:shadow-lg">
+              <Phone className="h-5 w-5 shrink-0 text-orange-dark" />
+              <div className="min-w-0">
+                <p className="font-semibold">Телефон администратора</p>
+                <a
+                  href={`tel:${site.phoneHref}`}
+                  className="mt-0.5 block text-sm text-blue"
+                >
+                  {site.phone}
+                </a>
               </div>
-              <a
-                href={`tel:${site.phoneHref}`}
-                className="mt-1 block pl-[34px] text-sm text-blue"
-              >
-                {site.phone}
-              </a>
             </FadeIn>
 
-            <FadeIn delay={0.15} className="card-paper rounded-2xl border border-graphite/10 bg-offwhite p-5 transition-all duration-300 hover:-translate-y-0.5 hover:border-orange-dark/30 hover:shadow-lg">
-              <div className="flex items-center gap-3.5">
-                <Mail className="h-5 w-5 shrink-0 text-orange-dark" />
-                <p className="min-w-0 font-semibold">Почта</p>
+            <FadeIn delay={0.15} className="card-paper flex items-center gap-3.5 rounded-2xl border border-graphite/10 bg-offwhite p-5 transition-all duration-300 hover:-translate-y-0.5 hover:border-orange-dark/30 hover:shadow-lg">
+              <Mail className="h-5 w-5 shrink-0 text-orange-dark" />
+              <div className="min-w-0">
+                <p className="font-semibold">Почта</p>
+                <a
+                  href={`mailto:${site.email}`}
+                  className="mt-0.5 block break-all text-sm text-blue underline-offset-2 hover:underline"
+                >
+                  {site.email}
+                </a>
               </div>
-              <a
-                href={`mailto:${site.email}`}
-                className="mt-1 block break-all pl-[34px] text-sm text-blue underline-offset-2 hover:underline"
-              >
-                {site.email}
-              </a>
             </FadeIn>
 
             <FadeIn delay={0.2} className="flex gap-3">
