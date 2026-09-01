@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { MapPin, MessageCircle, Phone, Send } from "lucide-react";
+import { Clock, Mail, MapPin, MessageCircle, Phone, Send } from "lucide-react";
 import { getContent } from "@/lib/content";
 
 const seoLinks = [
@@ -78,7 +78,19 @@ export default async function Footer() {
                 {site.phone}
               </a>
             </li>
-            <li className="pl-[26px] text-muted/80">{site.hours}</li>
+            <li className="flex items-center gap-2.5">
+              <Mail className="h-4 w-4 shrink-0 text-orange" />
+              <a
+                href={`mailto:${site.email}`}
+                className="break-all transition-colors duration-200 hover:text-offwhite"
+              >
+                {site.email}
+              </a>
+            </li>
+            <li className="flex items-center gap-2.5">
+              <Clock className="h-4 w-4 shrink-0 text-orange" />
+              <span className="text-muted/80">{site.hours}</span>
+            </li>
           </ul>
         </div>
 
