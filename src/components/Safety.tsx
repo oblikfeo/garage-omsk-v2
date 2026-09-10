@@ -7,15 +7,11 @@ import FadeIn from "./FadeIn";
 const icons = [UserCheck, Camera, ShieldCheck, AlertTriangle];
 
 export default async function Safety() {
-  const { safetyRules } = await getContent();
+  const { safetyRules, sections } = await getContent();
 
   return (
     <Section id="safety" variant="deep" pattern="tread">
-      <SectionHeading
-        eyebrow="Безопасность"
-        title="Порядок и ответственность на каждом посту"
-        description="Индустриальная площадка — это прежде всего дисциплина. Мы следим за оборудованием, вы отвечаете за аккуратную работу."
-      />
+      <SectionHeading {...sections.safety} />
 
       <div className="mt-10 grid gap-4 sm:mt-12 sm:grid-cols-2 sm:gap-5">
         {safetyRules.map((rule, i) => {

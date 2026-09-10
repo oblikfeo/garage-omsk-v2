@@ -7,44 +7,38 @@ import Faq from "@/components/Faq";
 import Contacts from "@/components/Contacts";
 import { getContent } from "@/lib/content";
 
-export const metadata: Metadata = {
-  title: "СТО самообслуживания в Омске — аренда постов и подъёмников",
-  description:
-    "СТО самообслуживания в Омске: аренда постов, подъёмников и шиномонтажного станка почасово и посуточно. Онлайн-запись, инструктаж по безопасности, понятный прайс.",
-  alternates: { canonical: "/sto-samoobsluzhivaniya-omsk" },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const { pages } = await getContent();
+  const page = pages.sto;
 
-const buildPageFaq = (hours: string) => [
-  {
-    q: "Чем СТО самообслуживания отличается от обычного автосервиса?",
-    a: "Вы арендуете пост, подъёмник и инструмент и выполняете ремонт своими руками — без наценки за работу мастера. Персонал только выдаёт оборудование и проводит инструктаж.",
-  },
-  {
-    q: "Подходит ли СТО самообслуживания новичкам?",
-    a: "Да, для несложных операций (замена масла, фильтров, колодок) администратор подскажет по инструменту. Для сложного ремонта рекомендуем иметь базовый опыт или взять консультацию мастера.",
-  },
-  {
-    q: "Работает ли СТО самообслуживания в Омске каждый день?",
-    a: `Режим работы бокса — ${hours.toLowerCase()}, включая праздничные дни.`,
-  },
-];
+  return {
+    title: page.metaTitle,
+    description: page.metaDescription,
+    alternates: { canonical: "/sto-samoobsluzhivaniya-omsk" },
+  };
+}
 
 export default async function StoSamoobsluzhivaniyaOmsk() {
-  const { steps, site } = await getContent();
-  const pageFaq = buildPageFaq(site.hours);
+  const { pages, sections, steps } = await getContent();
+  const page = pages.sto;
 
   return (
     <>
       <SeoHero
-        eyebrow="СТО самообслуживания Омск"
-        h1="СТО самообслуживания в Омске: пост и подъёмник в аренду"
-        intro="Работайте на профессиональном оборудовании сами и платите только за время на посту — без наценки за услуги мастера. Подъёмники, шиномонтаж и весь нужный инструмент уже на месте."
-        bullets={["Без абонементов", "Оплата по факту", "Инструктаж включён"]}
+        eyebrow={page.eyebrow}
+        h1={page.h1}
+        intro={page.intro}
+        bullets={page.bullets}
       />
       <Services />
       <PriceList />
-      <HowItWorks items={steps} />
-      <Faq id="faq-sto" title="Вопросы о СТО самообслуживания" items={pageFaq} />
+      <HowItWorks items={steps} heading={sections.how} />
+      <Faq
+        id="faq-sto"
+        eyebrow={sections.faq.eyebrow}
+        title={page.faqTitle}
+        items={page.faq}
+      />
       <Contacts />
     </>
   );

@@ -19,9 +19,11 @@ type Point = { x: number; y: number };
 export default function PlanViewer({
   open,
   onClose,
+  caption = "",
 }: {
   open: boolean;
   onClose: () => void;
+  caption?: string;
 }) {
   const [zoom, setZoom] = useState(1);
   const [offset, setOffset] = useState<Point>({ x: 0, y: 0 });
@@ -134,7 +136,7 @@ export default function PlanViewer({
                 Схема бокса
               </p>
               <p className="truncate text-xs text-muted sm:text-sm">
-                Расстановка 6 постов · масштаб колёсиком или кнопками
+                {caption}
               </p>
             </div>
 

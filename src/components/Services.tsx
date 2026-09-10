@@ -23,15 +23,11 @@ const icons = {
 const addonIcons = [Wrench, Wind, Droplets, MessageCircle];
 
 export default async function Services() {
-  const { addonServices, services } = await getContent();
+  const { addonServices, services, sections, texts } = await getContent();
 
   return (
     <Section id="services" pattern="perf">
-      <SectionHeading
-        eyebrow="Услуги"
-        title="Аренда постов, подъёмников и оборудования"
-        description="Выбирайте рабочее место под задачу — от поста до шиномонтажного станка. Всё оборудование обслуживается и проверяется ежедневно."
-      />
+      <SectionHeading {...sections.services} />
 
       <div className="mt-10 grid gap-4 sm:mt-12 sm:grid-cols-2 sm:gap-5 lg:grid-cols-4">
         {services.map((service, i) => {
@@ -68,7 +64,7 @@ export default async function Services() {
         <div className="mb-4 flex items-center gap-3">
           <span className="h-px flex-1 bg-white/10" />
           <h3 className="shrink-0 font-display text-sm font-semibold uppercase tracking-[0.14em] text-muted">
-            Дополнительные услуги
+            {texts.addonsTitle}
           </h3>
           <span className="h-px flex-1 bg-white/10" />
         </div>

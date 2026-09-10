@@ -19,6 +19,12 @@ import {
 
 import type {
   FaqItem,
+  HeroStat,
+  LooseTexts,
+  SectionHeadingContent,
+  SectionKey,
+  SeoPageContent,
+  SeoPageKey,
   GalleryItem,
   PriceRow,
   Service,
@@ -27,6 +33,12 @@ import type {
   SiteNotice,
   Testimonial,
   TitleText,
+} from "@/lib/content-types";
+import {
+  SECTION_LABELS,
+  SEO_PAGE_LABELS,
+  SEO_PAGE_PATHS,
+  TEXT_TOKENS,
 } from "@/lib/content-types";
 import {
   logoutAction,
@@ -322,6 +334,9 @@ function ImagePicker({
 type TabId =
   | "site"
   | "notice"
+  | "hero"
+  | "sections"
+  | "pages"
   | "services"
   | "priceList"
   | "gallery"
@@ -334,6 +349,9 @@ type TabId =
 const TABS: { id: TabId; label: string }[] = [
   { id: "site", label: "Контакты" },
   { id: "notice", label: "Плашка" },
+  { id: "hero", label: "Первый экран" },
+  { id: "sections", label: "Заголовки секций" },
+  { id: "pages", label: "SEO-страницы" },
   { id: "services", label: "Услуги" },
   { id: "priceList", label: "Прайс" },
   { id: "gallery", label: "Галерея" },
@@ -360,6 +378,7 @@ const SITE_GROUPS: {
       { key: "fullName", label: "Полное название" },
       { key: "city", label: "Город" },
       { key: "posts", label: "Количество постов", type: "number" },
+      { key: "lifts", label: "Количество подъёмников", type: "number" },
     ],
   },
   {
@@ -404,6 +423,37 @@ const SITE_GROUPS: {
     ],
   },
 ];
+
+const SECTION_ORDER = Object.keys(SECTION_LABELS) as SectionKey[];
+const SEO_ORDER = Object.keys(SEO_PAGE_LABELS) as SeoPageKey[];
+
+/** Reminds the editor which placeholders are substituted on the site. */
+function TokenHint() {
+  return (
+    <div className="rounded-xl border border-blue/25 bg-blue/5 p-4 text-xs leading-relaxed text-muted">
+      <p className="font-semibold text-offwhite">Подстановки</p>
+      <p className="mt-1">
+        В любой текст можно вставить значение из вкладки «Контакты» — оно
+        подставится на сайте само и больше не разъедется:
+      </p>
+      <p className="mt-2 flex flex-wrap gap-1.5">
+        {TEXT_TOKENS.map((token) => (
+          <code
+            key={token}
+            className="rounded bg-graphite px-1.5 py-0.5 font-mono text-[11px] text-blue"
+          >
+            {"{" + token + "}"}
+          </code>
+        ))}
+      </p>
+    </div>
+  );
+}
+
+const cardClass =
+  "rounded-2xl border border-white/10 bg-surface p-5 sm:p-6";
+const cardTitleClass =
+  "font-display text-sm font-semibold uppercase tracking-wider text-offwhite";
 
 /* ------------------------------------------------------------------ */
 /* editor                                                              */
@@ -458,6 +508,28 @@ export default function AdminEditor({
         ...current.notice,
         [tone]: { ...current.notice[tone], ...patch },
       },
+    }));
+  }
+
+  function patchHero(patch: Partial<SiteContent["hero"]>) {
+    setContent((current) => ({ ...current, hero: { ...current.hero, ...patch } }));
+  }
+
+  function patchSection(key: SectionKey, patch: Partial<SectionHeadingContent>) {
+    setContent((current) => ({
+      ...current,
+      sections: { ...current.sections, [key]: { ...current.sections[key], ...patch } },
+    }));
+  }
+
+  function patchTexts(patch: Partial<LooseTexts>) {
+    setContent((current) => ({ ...current, texts: { ...current.texts, ...patch } }));
+  }
+
+  function patchPage(key: SeoPageKey, patch: Partial<SeoPageContent>) {
+    setContent((current) => ({
+      ...current,
+      pages: { ...current.pages, [key]: { ...current.pages[key], ...patch } },
     }));
   }
 
@@ -744,6 +816,253 @@ export default function AdminEditor({
               У оранжевой кнопки нет — только текст.
             </p>
           </section>
+        )}
+
+        {tab === "hero" && (
+          <div className="space-y-5">
+            <TokenHint />
+
+            <section className={cardClass}>
+              <h2 className={cardTitleClass}>Заголовок и текст</h2>
+              <div className="mt-4 space-y-4">
+                <div className="grid gap-4 sm:grid-cols-3">
+                  <Field
+                    label="Начало"
+                    value={content.hero.titleBefore}
+                    onChange={(titleBefore) => patchHero({ titleBefore })}
+                  />
+                  <Field
+                    label="Выделено оранжевым"
+                    value={content.hero.titleAccent}
+                    onChange={(titleAccent) => patchHero({ titleAccent })}
+                  />
+                  <Field
+                    label="Окончание"
+                    value={content.hero.titleAfter}
+                    onChange={(titleAfter) => patchHero({ titleAfter })}
+                  />
+                </div>
+                <Area
+                  label="Абзац под заголовком"
+                  rows={4}
+                  value={content.hero.text}
+                  onChange={(text) => patchHero({ text })}
+                />
+              </div>
+            </section>
+
+            <section className={cardClass}>
+              <h2 className={cardTitleClass}>Подписи на фото</h2>
+              <div className="mt-4 grid gap-4 sm:grid-cols-2">
+                <Field
+                  label="Подпись на фото"
+                  value={content.hero.imageCaption}
+                  onChange={(imageCaption) => patchHero({ imageCaption })}
+                />
+                <Field
+                  label="Кнопка к галерее"
+                  value={content.hero.galleryLink}
+                  onChange={(galleryLink) => patchHero({ galleryLink })}
+                />
+              </div>
+            </section>
+
+            <section className={cardClass}>
+              <h2 className={cardTitleClass}>Показатели под текстом</h2>
+              <p className="mb-4 mt-1 text-xs text-steel">
+                Три плитки в самом низу первого экрана.
+              </p>
+              <ListEditor<HeroStat>
+                items={content.hero.stats}
+                onChange={(stats) => patchHero({ stats })}
+                blank={() => ({ label: "", sub: "" })}
+                addLabel="Добавить показатель"
+                rowTitle={(item) => item.label}
+                renderRow={(item, update) => (
+                  <div className="grid gap-4 sm:grid-cols-2">
+                    <Field
+                      label="Крупная строка"
+                      value={item.label}
+                      onChange={(label) => update({ label })}
+                    />
+                    <Field
+                      label="Подпись"
+                      value={item.sub}
+                      onChange={(sub) => update({ sub })}
+                    />
+                  </div>
+                )}
+              />
+            </section>
+          </div>
+        )}
+
+        {tab === "sections" && (
+          <div className="space-y-4">
+            <TokenHint />
+
+            {SECTION_ORDER.map((key) => (
+              <section key={key} className={cardClass}>
+                <h2 className={cardTitleClass}>{SECTION_LABELS[key]}</h2>
+                <div className="mt-4 space-y-4">
+                  <div className="grid gap-4 sm:grid-cols-2">
+                    <Field
+                      label="Надзаголовок"
+                      value={content.sections[key].eyebrow}
+                      onChange={(eyebrow) => patchSection(key, { eyebrow })}
+                    />
+                    <Field
+                      label="Заголовок"
+                      value={content.sections[key].title}
+                      onChange={(title) => patchSection(key, { title })}
+                    />
+                  </div>
+                  <Area
+                    label="Описание"
+                    rows={2}
+                    value={content.sections[key].description}
+                    onChange={(description) => patchSection(key, { description })}
+                  />
+                </div>
+              </section>
+            ))}
+
+            <section className={cardClass}>
+              <h2 className={cardTitleClass}>Отдельные надписи</h2>
+              <div className="mt-4 space-y-4">
+                <Field
+                  label="Заголовок над дополнительными услугами"
+                  value={content.texts.addonsTitle}
+                  onChange={(addonsTitle) => patchTexts({ addonsTitle })}
+                />
+                <Area
+                  label="Примечание под прайсом"
+                  rows={2}
+                  value={content.texts.priceNote}
+                  onChange={(priceNote) => patchTexts({ priceNote })}
+                />
+                <Field
+                  label="Кнопка под прайсом"
+                  value={content.texts.priceCta}
+                  onChange={(priceCta) => patchTexts({ priceCta })}
+                />
+                <Field
+                  label="Заголовок баннера со схемой"
+                  value={content.texts.planTitle}
+                  onChange={(planTitle) => patchTexts({ planTitle })}
+                />
+                <Area
+                  label="Текст баннера со схемой"
+                  rows={3}
+                  value={content.texts.planText}
+                  onChange={(planText) => patchTexts({ planText })}
+                />
+                <Field
+                  label="Подпись в просмотрщике схемы"
+                  value={content.texts.planViewerCaption}
+                  onChange={(planViewerCaption) => patchTexts({ planViewerCaption })}
+                />
+                <Field
+                  label="Текст, если виджет записи не загрузился"
+                  value={content.texts.bookingFallback}
+                  onChange={(bookingFallback) => patchTexts({ bookingFallback })}
+                />
+              </div>
+            </section>
+          </div>
+        )}
+
+        {tab === "pages" && (
+          <div className="space-y-4">
+            <TokenHint />
+
+            {SEO_ORDER.map((key) => (
+              <section key={key} className={cardClass}>
+                <div className="flex flex-wrap items-baseline gap-2">
+                  <h2 className={cardTitleClass}>{SEO_PAGE_LABELS[key]}</h2>
+                  <code className="font-mono text-xs text-steel">
+                    {SEO_PAGE_PATHS[key]}
+                  </code>
+                </div>
+
+                <div className="mt-4 space-y-4">
+                  <Field
+                    label="Заголовок для поисковиков"
+                    value={content.pages[key].metaTitle}
+                    onChange={(metaTitle) => patchPage(key, { metaTitle })}
+                  />
+                  <Area
+                    label="Описание для поисковиков"
+                    rows={3}
+                    value={content.pages[key].metaDescription}
+                    onChange={(metaDescription) => patchPage(key, { metaDescription })}
+                  />
+
+                  <div className="grid gap-4 sm:grid-cols-2">
+                    <Field
+                      label="Надзаголовок"
+                      value={content.pages[key].eyebrow}
+                      onChange={(eyebrow) => patchPage(key, { eyebrow })}
+                    />
+                    <Field
+                      label="Заголовок страницы"
+                      value={content.pages[key].h1}
+                      onChange={(h1) => patchPage(key, { h1 })}
+                    />
+                  </div>
+
+                  <Area
+                    label="Вводный текст"
+                    rows={3}
+                    value={content.pages[key].intro}
+                    onChange={(intro) => patchPage(key, { intro })}
+                  />
+
+                  <StringList
+                    label="Плашки под текстом"
+                    items={content.pages[key].bullets}
+                    onChange={(bullets) => patchPage(key, { bullets })}
+                    placeholder="Добавить плашку"
+                  />
+
+                  <Field
+                    label="Заголовок блока вопросов"
+                    value={content.pages[key].faqTitle}
+                    onChange={(faqTitle) => patchPage(key, { faqTitle })}
+                  />
+
+                  <div>
+                    <span className="text-xs font-semibold uppercase tracking-wider text-muted">
+                      Вопросы и ответы
+                    </span>
+                    <div className="mt-1.5">
+                      <ListEditor<FaqItem>
+                        items={content.pages[key].faq}
+                        onChange={(faq) => patchPage(key, { faq })}
+                        blank={() => ({ q: "", a: "" })}
+                        addLabel="Добавить вопрос"
+                        rowTitle={(item) => item.q}
+                        renderRow={(item, update) => (
+                          <div className="space-y-4">
+                            <Field
+                              label="Вопрос"
+                              value={item.q}
+                              onChange={(q) => update({ q })}
+                            />
+                            <Area
+                              label="Ответ"
+                              value={item.a}
+                              onChange={(a) => update({ a })}
+                            />
+                          </div>
+                        )}
+                      />
+                    </div>
+                  </div>
+                </div>
+              </section>
+            ))}
+          </div>
         )}
 
         {tab === "services" && (

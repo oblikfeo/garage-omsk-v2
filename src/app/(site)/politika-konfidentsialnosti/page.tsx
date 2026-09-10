@@ -2,12 +2,15 @@ import type { Metadata } from "next";
 import { getContent } from "@/lib/content";
 import type { SiteInfo } from "@/lib/content-types";
 
-export const metadata: Metadata = {
-  title: "Политика обработки персональных данных",
-  description:
-    "Политика обработки персональных данных посетителей сайта Гараж самообслуживания в Омске.",
-  robots: { index: false, follow: true },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const { site } = await getContent();
+
+  return {
+    title: "Политика обработки персональных данных",
+    description: `Политика обработки персональных данных посетителей сайта ${site.fullName} в городе ${site.city}.`,
+    robots: { index: false, follow: true },
+  };
+}
 
 function buildSections(site: SiteInfo) {
   return [

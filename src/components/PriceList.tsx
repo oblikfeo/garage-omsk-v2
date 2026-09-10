@@ -5,16 +5,11 @@ import SectionHeading from "./SectionHeading";
 import FadeIn from "./FadeIn";
 
 export default async function PriceList() {
-  const { priceList } = await getContent();
+  const { priceList, sections, texts } = await getContent();
 
   return (
     <Section id="prices" variant="light" pattern="blueprint">
-      <SectionHeading
-        light
-        eyebrow="Прайс-лист"
-        title="Почасовая и посуточная аренда"
-        description="Никаких скрытых доплат — итоговая цена всегда известна заранее. Оплата на месте или онлайн при бронировании."
-      />
+      <SectionHeading light {...sections.prices} />
 
       {/* Mobile: stacked cards */}
       <ul className="mt-8 space-y-3 sm:hidden">
@@ -84,14 +79,13 @@ export default async function PriceList() {
 
       <div className="mt-8 flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:justify-between">
         <p className="max-w-md text-sm text-steel">
-          Для длительной аренды (от 3 суток) и корпоративных клиентов —
-          индивидуальные условия. Уточняйте у администратора.
+          {texts.priceNote}
         </p>
         <Link
           href="#booking"
           className="whitespace-nowrap rounded-xl bg-graphite-deep px-6 py-3.5 text-sm font-semibold text-offwhite transition-all duration-300 hover:-translate-y-0.5 hover:bg-graphite hover:shadow-lg active:translate-y-0"
         >
-          Выбрать пост и время
+          {texts.priceCta}
         </Link>
       </div>
     </Section>

@@ -11,8 +11,8 @@ import {
   ShieldCheck,
   Timer,
 } from "lucide-react";
-import { site as defaultSite } from "@/lib/data";
-import type { SiteInfo } from "@/lib/content-types";
+import { hero as defaultHero, site as defaultSite } from "@/lib/data";
+import type { HeroContent, SiteInfo } from "@/lib/content-types";
 
 const container = {
   hidden: {},
@@ -28,24 +28,19 @@ const item = {
   },
 };
 
-export default function Hero({ site = defaultSite }: { site?: SiteInfo }) {
-  // "Ежедневно, 09:00–19:00" → крупно время, мелко периодичность.
-  // Без запятой строка показывается целиком.
-  const commaAt = site.hours.indexOf(",");
-  const hoursLabel =
-    commaAt === -1 ? site.hours : site.hours.slice(commaAt + 1).trim();
-  const hoursSub =
-    commaAt === -1 ? "режим работы" : site.hours.slice(0, commaAt).trim();
+const statIcons = [Timer, ShieldCheck, CalendarCheck];
 
-  const stats = [
-    { icon: Timer, label: "от 1 часа", sub: "почасовая аренда" },
-    {
-      icon: ShieldCheck,
-      label: `${site.posts} постов`,
-      sub: "и подъёмников в боксе",
-    },
-    { icon: CalendarCheck, label: hoursLabel, sub: hoursSub },
-  ];
+export default function Hero({
+  site = defaultSite,
+  hero = defaultHero,
+}: {
+  site?: SiteInfo;
+  hero?: HeroContent;
+}) {
+  const stats = hero.stats.map((stat, i) => ({
+    ...stat,
+    icon: statIcons[i % statIcons.length],
+  }));
 
   return (
     <section className="relative overflow-hidden bg-[#16191c]">
@@ -68,18 +63,16 @@ export default function Hero({ site = defaultSite }: { site?: SiteInfo }) {
             variants={item}
             className="text-balance font-display text-[2.15rem] font-semibold leading-[1.12] tracking-tight text-offwhite sm:text-5xl lg:text-[3.4rem] lg:leading-[1.08]"
           >
-            Ремонтируйте машину сами —{" "}
-            <span className="text-orange">пост и подъёмник</span> в аренду
-            почасово
+            {hero.titleBefore}{" "}
+            <span className="text-orange">{hero.titleAccent}</span>{" "}
+            {hero.titleAfter}
           </motion.h1>
 
           <motion.p
             variants={item}
             className="mt-5 max-w-xl text-base leading-relaxed text-muted sm:mt-6 sm:text-lg"
           >
-            Профессиональный бокс с двумя типами подъёмников и шиномонтажным
-            станком. Платите только за время работы — от часа до суток, без
-            абонементов и переплат за сервис.
+            {hero.text}
           </motion.p>
 
           <motion.div
@@ -120,7 +113,7 @@ export default function Hero({ site = defaultSite }: { site?: SiteInfo }) {
                 className="flex min-w-0 flex-col items-start gap-1.5"
               >
                 <Icon className="h-4 w-4 shrink-0 text-blue" />
-                <dt className="whitespace-nowrap font-display text-sm font-semibold leading-tight text-offwhite sm:text-lg">
+                <dt className="font-display text-sm font-semibold leading-tight text-offwhite sm:text-lg">
                   {label}
                 </dt>
                 <dd className="text-[11px] leading-snug text-muted sm:text-xs">
@@ -154,7 +147,7 @@ export default function Hero({ site = defaultSite }: { site?: SiteInfo }) {
 
             <figcaption className="absolute inset-x-0 bottom-0 flex flex-wrap items-end justify-between gap-3 p-4 sm:p-5">
               <span className="font-display text-sm font-semibold text-offwhite sm:text-base">
-                6 постов, 5 подъёмников, шиномонтаж
+                {hero.imageCaption}
                 <span className="mt-0.5 block text-xs font-normal text-muted">
                   {site.address}
                 </span>
@@ -164,7 +157,7 @@ export default function Hero({ site = defaultSite }: { site?: SiteInfo }) {
                 className="flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-lg border border-white/20 bg-graphite-deep/60 px-3 py-2 text-xs font-semibold text-offwhite backdrop-blur transition-colors duration-200 hover:border-orange/50 hover:text-orange"
               >
                 <ImageIcon className="h-3.5 w-3.5" />
-                Все фото
+                {hero.galleryLink}
               </Link>
             </figcaption>
           </figure>

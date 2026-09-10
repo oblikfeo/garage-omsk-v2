@@ -12,17 +12,19 @@ type FaqItem = { q: string; a: string };
 export default function Faq({
   items = defaultFaq,
   id = "faq",
+  eyebrow = "FAQ",
   title = "Частые вопросы",
 }: {
   items?: FaqItem[];
   id?: string;
+  eyebrow?: string;
   title?: string;
 }) {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
     <Section id={id} pattern="blueprint" containerClassName="max-w-3xl">
-      <SectionHeading eyebrow="FAQ" title={title} center />
+      <SectionHeading eyebrow={eyebrow} title={title} center />
 
       <FadeIn
         delay={0.1}

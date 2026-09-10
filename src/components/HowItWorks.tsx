@@ -10,7 +10,8 @@ import {
   type MotionValue,
 } from "framer-motion";
 import { steps as defaultSteps } from "@/lib/data";
-import type { TitleText } from "@/lib/content-types";
+import type { SectionHeadingContent, TitleText } from "@/lib/content-types";
+import { sections as defaultSections } from "@/lib/data";
 import Section from "./Section";
 import SectionHeading from "./SectionHeading";
 
@@ -80,7 +81,13 @@ function StepTile({
   );
 }
 
-export default function HowItWorks({ items = defaultSteps }: { items?: TitleText[] }) {
+export default function HowItWorks({
+  items = defaultSteps,
+  heading = defaultSections.how,
+}: {
+  items?: TitleText[];
+  heading?: SectionHeadingContent;
+}) {
   const steps = items;
   const sectionRef = useRef<HTMLDivElement>(null);
   const inView = useInView(sectionRef, { amount: 0.4 });
@@ -102,12 +109,7 @@ export default function HowItWorks({ items = defaultSteps }: { items?: TitleText
 
   return (
     <Section id="how" pattern="blueprint">
-      <SectionHeading
-        eyebrow="Как это работает"
-        title="От онлайн-записи до завершения работ"
-        description="Пять простых шагов — без очередей и лишних формальностей."
-        center
-      />
+      <SectionHeading {...heading} center />
 
       <div ref={sectionRef} className="relative mt-14 sm:mt-16">
         {/* static track */}

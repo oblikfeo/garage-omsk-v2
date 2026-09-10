@@ -12,7 +12,7 @@ import { getContent } from "@/lib/content";
 import { getSiteUrl } from "@/lib/site-url";
 
 export default async function Home() {
-  const { site, gallery, steps, faq } = await getContent();
+  const { site, hero, gallery, steps, faq, sections, texts } = await getContent();
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "AutomotiveBusiness",
@@ -35,15 +35,21 @@ export default async function Home() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <Hero site={site} />
+      <Hero site={site} hero={hero} />
       <Services />
       <PriceList />
-      <Gallery items={gallery} />
-      <HowItWorks items={steps} />
+      <Gallery
+        items={gallery}
+        heading={sections.gallery}
+        planTitle={texts.planTitle}
+        planText={texts.planText}
+        planViewerCaption={texts.planViewerCaption}
+      />
+      <HowItWorks items={steps} heading={sections.how} />
       <Safety />
       <Testimonials />
       <BookingSection />
-      <Faq items={faq} />
+      <Faq items={faq} eyebrow={sections.faq.eyebrow} title={sections.faq.title} />
       <Contacts />
     </>
   );

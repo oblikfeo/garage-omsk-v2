@@ -11,7 +11,8 @@ import {
   X,
 } from "lucide-react";
 import { gallery as defaultGallery } from "@/lib/data";
-import type { GalleryItem } from "@/lib/content-types";
+import type { GalleryItem, SectionHeadingContent } from "@/lib/content-types";
+import { sections as defaultSections, texts as defaultTexts } from "@/lib/data";
 import Section from "./Section";
 import SectionHeading from "./SectionHeading";
 import FadeIn from "./FadeIn";
@@ -24,7 +25,19 @@ const tileSpans = [
   "lg:col-span-1",
 ];
 
-export default function Gallery({ items = defaultGallery }: { items?: GalleryItem[] }) {
+export default function Gallery({
+  items = defaultGallery,
+  heading = defaultSections.gallery,
+  planTitle = defaultTexts.planTitle,
+  planText = defaultTexts.planText,
+  planViewerCaption = defaultTexts.planViewerCaption,
+}: {
+  items?: GalleryItem[];
+  heading?: SectionHeadingContent;
+  planTitle?: string;
+  planText?: string;
+  planViewerCaption?: string;
+}) {
   const gallery = items;
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const [planOpen, setPlanOpen] = useState(false);
@@ -64,11 +77,7 @@ export default function Gallery({ items = defaultGallery }: { items?: GalleryIte
 
   return (
     <Section id="gallery" variant="deep" pattern="hatch" band>
-      <SectionHeading
-        eyebrow="Фотографии"
-        title="Наш бокс и оборудование"
-        description="Реальные фото постов, подъёмников и инструмента — смотрите, где будете работать, ещё до записи."
-      />
+      <SectionHeading {...heading} />
 
       <div className="mt-10 grid gap-3 sm:mt-12 sm:grid-cols-2 sm:gap-4 lg:grid-cols-4 lg:grid-rows-2 lg:h-[560px]">
         {gallery.map((photo, i) => (
@@ -137,12 +146,10 @@ export default function Gallery({ items = defaultGallery }: { items?: GalleryIte
               </span>
               <span>
                 <span className="block font-display text-lg font-semibold text-offwhite sm:text-xl">
-                  Схема бокса и расстановка постов
+                  {planTitle}
                 </span>
                 <span className="mt-1 block max-w-xl text-sm leading-relaxed text-muted">
-                  Чертёж с размерами: 6 постов, подъёмники, шиномонтаж, верстаки
-                  и зоны оборудования. Откройте просмотр и увеличьте нужный
-                  участок.
+                  {planText}
                 </span>
               </span>
             </span>
@@ -155,7 +162,11 @@ export default function Gallery({ items = defaultGallery }: { items?: GalleryIte
         </button>
       </FadeIn>
 
-      <PlanViewer open={planOpen} onClose={() => setPlanOpen(false)} />
+      <PlanViewer
+        open={planOpen}
+        onClose={() => setPlanOpen(false)}
+        caption={planViewerCaption}
+      />
 
       <AnimatePresence>
         {active && (

@@ -1,6 +1,6 @@
 import { redirect } from "next/navigation";
 import { isAuthed } from "@/lib/admin-auth";
-import { contentFile, getContent } from "@/lib/content";
+import { contentFile, getRawContent } from "@/lib/content";
 import AdminEditor from "./AdminEditor";
 
 export const dynamic = "force-dynamic";
@@ -10,7 +10,7 @@ export default async function AdminPage() {
     redirect("/admin/login");
   }
 
-  const content = await getContent();
+  const content = await getRawContent();
 
   return <AdminEditor initial={content} storePath={contentFile()} />;
 }

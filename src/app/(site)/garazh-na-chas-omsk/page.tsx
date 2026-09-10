@@ -7,43 +7,38 @@ import Faq from "@/components/Faq";
 import Contacts from "@/components/Contacts";
 import { getContent } from "@/lib/content";
 
-export const metadata: Metadata = {
-  title: "Гараж на час в Омске — почасовая аренда бокса с подъёмником",
-  description:
-    "Гараж на час в Омске: почасовая аренда бокса и подъёмника для мелкого и среднего ремонта автомобиля. Онлайн-бронь, без очередей, работаем ежедневно.",
-  alternates: { canonical: "/garazh-na-chas-omsk" },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const { pages } = await getContent();
+  const page = pages.garazh;
 
-const pageFaq = [
-  {
-    q: "Можно ли арендовать гараж на час без предоплаты?",
-    a: "Да, для брони на текущий день доступна оплата на месте. Для брони на популярное время (вечер, выходные) рекомендуем предоплату 30%, чтобы место точно осталось за вами.",
-  },
-  {
-    q: "Какой минимальный срок аренды гаража на час?",
-    a: "Минимальная бронь — 1 час. Дальше можно продлить прямо на месте, если пост свободен.",
-  },
-  {
-    q: "Есть ли скидка при аренде гаража на несколько часов подряд?",
-    a: "Да, при бронировании от 4 часов действует сниженный часовой тариф — расчёт итоговой суммы виден сразу в форме онлайн-записи.",
-  },
-];
+  return {
+    title: page.metaTitle,
+    description: page.metaDescription,
+    alternates: { canonical: "/garazh-na-chas-omsk" },
+  };
+}
 
 export default async function GarazhNaChasOmsk() {
-  const { steps } = await getContent();
+  const { pages, sections, steps } = await getContent();
+  const page = pages.garazh;
 
   return (
     <>
       <SeoHero
-        eyebrow="Гараж на час Омск"
-        h1="Гараж на час в Омске — быстрая аренда бокса"
-        intro="Нужно на пару часов заехать заменить масло, колодки или подвеску? Берите пост или подъёмник на час — без абонементов и очереди в сервис."
-        bullets={["От 1 часа", "Онлайн-бронь", "Работаем ежедневно"]}
+        eyebrow={page.eyebrow}
+        h1={page.h1}
+        intro={page.intro}
+        bullets={page.bullets}
       />
       <Services />
       <PriceList />
-      <HowItWorks items={steps} />
-      <Faq id="faq-garazh" title="Вопросы о гараже на час" items={pageFaq} />
+      <HowItWorks items={steps} heading={sections.how} />
+      <Faq
+        id="faq-garazh"
+        eyebrow={sections.faq.eyebrow}
+        title={page.faqTitle}
+        items={page.faq}
+      />
       <Contacts />
     </>
   );

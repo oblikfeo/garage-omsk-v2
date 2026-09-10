@@ -1,10 +1,12 @@
 import { ExternalLink } from "lucide-react";
-import { site } from "@/lib/data";
+import { getContent } from "@/lib/content";
 import Section from "./Section";
 import SectionHeading from "./SectionHeading";
 import FadeIn from "./FadeIn";
 
-export default function BookingSection() {
+export default async function BookingSection() {
+  const { site, sections, texts } = await getContent();
+
   return (
     <Section
       id="booking"
@@ -13,12 +15,7 @@ export default function BookingSection() {
       band
       containerClassName="max-w-5xl"
     >
-      <SectionHeading
-        eyebrow="Онлайн-запись"
-        title="Забронируйте пост за 2 минуты"
-        description="Выберите услугу, дату и время прямо на сайте — запись сразу попадает в систему."
-        center
-      />
+      <SectionHeading {...sections.booking} center />
 
       <FadeIn delay={0.1} className="mt-8 sm:mt-10">
         <div className="overflow-hidden rounded-3xl border border-white/10 bg-white shadow-xl shadow-black/20">
@@ -33,7 +30,7 @@ export default function BookingSection() {
         </div>
 
         <p className="mt-4 text-center text-sm text-muted">
-          Если виджет не загрузился,{" "}
+          {texts.bookingFallback}{" "}
           <a
             href={site.yclientsUrl}
             target="_blank"

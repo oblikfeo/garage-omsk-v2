@@ -5,16 +5,11 @@ import SectionHeading from "./SectionHeading";
 import FadeIn from "./FadeIn";
 
 export default async function Contacts() {
-  const { site } = await getContent();
+  const { site, sections } = await getContent();
 
   return (
     <Section id="contacts" variant="light" pattern="perf">
-      <SectionHeading
-        light
-        eyebrow="Контакты"
-        title="Как нас найти"
-        description="Заезд со стороны Заводской улицы, парковка перед боксом. Позвоните заранее, если приезжаете впервые."
-      />
+      <SectionHeading light {...sections.contacts} />
 
       <div className="mt-8 grid gap-5 sm:mt-10 sm:gap-6 lg:grid-cols-[0.9fr_1.1fr]">
           <div className="space-y-3 sm:space-y-4">

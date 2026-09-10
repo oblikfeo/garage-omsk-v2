@@ -5,11 +5,11 @@ import SectionHeading from "./SectionHeading";
 import FadeIn from "./FadeIn";
 
 export default async function Testimonials() {
-  const { testimonials } = await getContent();
+  const { testimonials, sections } = await getContent();
 
   return (
     <Section pattern="perf" watermark="5,0">
-      <SectionHeading eyebrow="Отзывы" title="Что говорят клиенты" center />
+      <SectionHeading {...sections.testimonials} center />
 
       <div className="mt-10 grid gap-4 sm:mt-12 sm:gap-5 md:grid-cols-3">
         {testimonials.map((t, i) => (
