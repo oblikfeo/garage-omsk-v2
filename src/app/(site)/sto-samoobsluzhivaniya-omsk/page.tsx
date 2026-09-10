@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/sto-samoobsluzhivaniya-omsk" },
 };
 
-const pageFaq = [
+const buildPageFaq = (hours: string) => [
   {
     q: "Чем СТО самообслуживания отличается от обычного автосервиса?",
     a: "Вы арендуете пост, подъёмник и инструмент и выполняете ремонт своими руками — без наценки за работу мастера. Персонал только выдаёт оборудование и проводит инструктаж.",
@@ -25,12 +25,13 @@ const pageFaq = [
   },
   {
     q: "Работает ли СТО самообслуживания в Омске каждый день?",
-    a: "Да, бокс открыт ежедневно с 09:00 до 19:00, включая праздничные дни.",
+    a: `Режим работы бокса — ${hours.toLowerCase()}, включая праздничные дни.`,
   },
 ];
 
 export default async function StoSamoobsluzhivaniyaOmsk() {
-  const { steps } = await getContent();
+  const { steps, site } = await getContent();
+  const pageFaq = buildPageFaq(site.hours);
 
   return (
     <>

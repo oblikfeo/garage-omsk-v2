@@ -29,6 +29,14 @@ const item = {
 };
 
 export default function Hero({ site = defaultSite }: { site?: SiteInfo }) {
+  // "Ежедневно, 09:00–19:00" → крупно время, мелко периодичность.
+  // Без запятой строка показывается целиком.
+  const commaAt = site.hours.indexOf(",");
+  const hoursLabel =
+    commaAt === -1 ? site.hours : site.hours.slice(commaAt + 1).trim();
+  const hoursSub =
+    commaAt === -1 ? "режим работы" : site.hours.slice(0, commaAt).trim();
+
   const stats = [
     { icon: Timer, label: "от 1 часа", sub: "почасовая аренда" },
     {
@@ -36,7 +44,7 @@ export default function Hero({ site = defaultSite }: { site?: SiteInfo }) {
       label: `${site.posts} постов`,
       sub: "и подъёмников в боксе",
     },
-    { icon: CalendarCheck, label: "09:00–19:00", sub: "без выходных" },
+    { icon: CalendarCheck, label: hoursLabel, sub: hoursSub },
   ];
 
   return (
