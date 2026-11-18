@@ -34,6 +34,8 @@ export type Common = {
   seo_text: string;
   /** Path relative to content/, for error messages. */
   file: string;
+  /** Every frontmatter field as written, for custom fields used by custom templates. */
+  data: Record<string, unknown>;
 };
 
 export type GeoPage = Common & {
@@ -239,6 +241,7 @@ function common(problems: Problems, file: string, data: Record<string, unknown>,
     faq: asFaq(data.faq),
     seo_text: body,
     file,
+    data,
   };
 }
 
@@ -343,7 +346,7 @@ function load(): Content {
       const abs = path.join(CONTENT_DIR, file);
       if (!fs.existsSync(abs)) {
         problems.error(file, "нет файла страницы-хаба");
-        return [key, { slug: key, h1: key, title: "", description: "", index: false, faq: [], seo_text: "", file, type: "hub", key } as HubPage];
+        return [key, { slug: key, h1: key, title: "", description: "", index: false, faq: [], seo_text: "", file, data: {}, type: "hub", key } as HubPage];
       }
       const parsed = matter(fs.readFileSync(abs, "utf8"));
       const base = common(problems, file, parsed.data, parsed.content.trim());
