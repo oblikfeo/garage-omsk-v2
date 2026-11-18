@@ -124,6 +124,9 @@ function heroContent(value: unknown): HeroContent {
     titleAccent: str(raw.titleAccent, defaultHero.titleAccent),
     titleAfter: str(raw.titleAfter, defaultHero.titleAfter),
     text: str(raw.text, defaultHero.text),
+    // An emptied field falls back to the stock photo instead of a broken image.
+    image: str(raw.image, "").trim() || defaultHero.image,
+    imageAlt: str(raw.imageAlt, "").trim() || defaultHero.imageAlt,
     imageCaption: str(raw.imageCaption, defaultHero.imageCaption),
     galleryLink: str(raw.galleryLink, defaultHero.galleryLink),
     stats: list(

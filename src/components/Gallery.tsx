@@ -185,7 +185,7 @@ export default function Gallery({
               type="button"
               onClick={close}
               aria-label="Закрыть"
-              className="absolute right-4 top-4 flex h-11 w-11 items-center justify-center rounded-xl border border-white/15 text-offwhite transition-colors duration-200 hover:bg-white/10 sm:right-6 sm:top-6"
+              className="absolute right-4 top-4 z-10 flex h-11 w-11 items-center justify-center rounded-xl border border-white/15 text-offwhite transition-colors duration-200 bg-graphite-deep/75 backdrop-blur hover:bg-graphite sm:right-6 sm:top-6"
             >
               <X className="h-5 w-5" />
             </button>
@@ -197,7 +197,7 @@ export default function Gallery({
                 shift(-1);
               }}
               aria-label="Предыдущее фото"
-              className="absolute left-2 flex h-11 w-11 items-center justify-center rounded-xl border border-white/15 text-offwhite transition-colors duration-200 hover:bg-white/10 sm:left-6"
+              className="absolute left-2 z-10 flex h-11 w-11 items-center justify-center rounded-xl border border-white/15 text-offwhite transition-colors duration-200 bg-graphite-deep/75 backdrop-blur hover:bg-graphite sm:left-6"
             >
               <ChevronLeft className="h-5 w-5" />
             </button>
@@ -209,7 +209,7 @@ export default function Gallery({
                 shift(1);
               }}
               aria-label="Следующее фото"
-              className="absolute right-2 flex h-11 w-11 items-center justify-center rounded-xl border border-white/15 text-offwhite transition-colors duration-200 hover:bg-white/10 sm:right-6"
+              className="absolute right-2 z-10 flex h-11 w-11 items-center justify-center rounded-xl border border-white/15 text-offwhite transition-colors duration-200 bg-graphite-deep/75 backdrop-blur hover:bg-graphite sm:right-6"
             >
               <ChevronRight className="h-5 w-5" />
             </button>
@@ -220,7 +220,14 @@ export default function Gallery({
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
               onClick={(e) => e.stopPropagation()}
-              className="w-full max-w-4xl"
+              drag="x"
+              dragConstraints={{ left: 0, right: 0 }}
+              dragElastic={0.5}
+              onDragEnd={(_, info) => {
+                if (info.offset.x < -60) shift(1);
+                else if (info.offset.x > 60) shift(-1);
+              }}
+              className="w-full max-w-4xl touch-pan-y"
             >
               <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl ring-1 ring-white/15">
                 <Image
@@ -228,10 +235,16 @@ export default function Gallery({
                   alt={active.alt}
                   fill
                   sizes="(max-width: 1024px) 100vw, 896px"
+                  draggable={false}
                   className="object-cover"
                 />
               </div>
               <figcaption className="mt-4 text-center">
+                {gallery.length > 1 && openIndex !== null && (
+                  <span className="mb-1 block text-xs font-semibold tracking-wider text-steel-light">
+                    {openIndex + 1} / {gallery.length}
+                  </span>
+                )}
                 <span className="block font-display text-lg font-semibold text-offwhite">
                   {active.title}
                 </span>

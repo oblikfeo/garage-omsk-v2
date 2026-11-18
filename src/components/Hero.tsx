@@ -133,8 +133,8 @@ export default function Hero({
           <figure className="group relative overflow-hidden rounded-3xl shadow-2xl shadow-black/40 ring-1 ring-white/10">
             <div className="relative aspect-[4/3]">
               <Image
-                src="/gallery/hall-lifts.jpg"
-                alt="Бокс СТО самообслуживания в Омске с двухстоечными подъёмниками"
+                src={hero.image || defaultHero.image}
+                alt={hero.imageAlt || defaultHero.imageAlt}
                 fill
                 priority
                 sizes="(max-width: 1024px) 100vw, 620px"

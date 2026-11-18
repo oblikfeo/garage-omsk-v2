@@ -852,7 +852,22 @@ export default function AdminEditor({
             </section>
 
             <section className={cardClass}>
-              <h2 className={cardTitleClass}>Подписи на фото</h2>
+              <h2 className={cardTitleClass}>Главное фото</h2>
+              <p className="mb-4 mt-1 text-xs text-steel">
+                Большое фото справа от заголовка на первом экране (на телефоне — под текстом).
+                Лучше горизонтальное, примерно 4:3. Галерея ниже настраивается отдельно.
+              </p>
+              <ImagePicker
+                value={content.hero.image}
+                onChange={(image) => patchHero({ image })}
+              />
+              <div className="mt-4">
+                <Field
+                  label="Описание фото для поисковиков"
+                  value={content.hero.imageAlt}
+                  onChange={(imageAlt) => patchHero({ imageAlt })}
+                />
+              </div>
               <div className="mt-4 grid gap-4 sm:grid-cols-2">
                 <Field
                   label="Подпись на фото"

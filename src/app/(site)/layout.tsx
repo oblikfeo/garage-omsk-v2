@@ -1,6 +1,10 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import SiteNoticeWidget from "@/components/SiteNotice";
+import YandexMetrika from "@/components/YandexMetrika";
+import VkPixel from "@/components/VkPixel";
+import PageViewHits from "@/components/PageViewHits";
+import SameHashScroll from "@/components/SameHashScroll";
 import { getContent } from "@/lib/content";
 
 /**
@@ -18,6 +22,11 @@ export default async function SiteLayout({
 
   return (
     <>
+      {/* Counters go first so they load as early as possible. */}
+      <YandexMetrika />
+      <VkPixel />
+      <PageViewHits />
+      <SameHashScroll />
       <Header site={site} />
       <main className="flex-1">{children}</main>
       <Footer />

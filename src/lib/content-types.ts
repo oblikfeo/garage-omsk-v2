@@ -73,6 +73,10 @@ export type HeroContent = {
   titleAccent: string;
   titleAfter: string;
   text: string;
+  /** Main photo on the first screen: a path under /public, e.g. /uploads/... */
+  image: string;
+  /** Alt text of the main photo (read by search engines and screen readers). */
+  imageAlt: string;
   imageCaption: string;
   galleryLink: string;
   stats: HeroStat[];

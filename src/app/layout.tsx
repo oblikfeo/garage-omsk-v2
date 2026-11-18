@@ -46,6 +46,10 @@ export async function generateMetadata(): Promise<Metadata> {
     icon: [{ url: "/favicon.svg", type: "image/svg+xml" }],
     apple: [{ url: "/favicon.svg" }],
   },
+  // Yandex.Webmaster site ownership: <meta name="yandex-verification">
+  verification: {
+    yandex: "2e9d64f577afdeca",
+  },
   };
 }
 
