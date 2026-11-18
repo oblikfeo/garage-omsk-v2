@@ -17,6 +17,7 @@ flock -w 1200 9 || { echo "another deploy is still running"; exit 1; }
 echo "== prepare $NEW"
 rm -rf "$NEW"
 cp -a "$STAGE" "$NEW"
+chmod 755 "$NEW"
 cp -a "$LIVE/node_modules" "$NEW/node_modules"
 cp -a "$LIVE"/.env.production "$NEW/" 2>/dev/null || true
 mkdir -p "$NEW/data" "$NEW/public/uploads"
