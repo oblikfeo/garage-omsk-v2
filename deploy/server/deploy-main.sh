@@ -6,7 +6,7 @@
 set -euo pipefail
 
 BASE=/opt/garage-deploy
-SEO_DIRS=("content" "src/app/(seo)" "src/components/seo" "public/seo")
+SEO_DIRS=("content" "src/app/(seo)" "src/components/seo" "src/lib/seo" "public/seo")
 
 IN=$(mktemp -d /tmp/garage-main.XXXXXX)
 STAGE=$(mktemp -d /tmp/garage-stage.XXXXXX)

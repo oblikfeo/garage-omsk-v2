@@ -2,12 +2,12 @@
 # Publish pages from the garageseo repository.
 # Called by its GitHub Action over SSH (forced command); a tar.gz of the
 # repository's website/ folders arrives on stdin. Only these folders are taken:
-#   content/  src/app/(seo)/  src/components/seo/  public/seo/
+#   content/  src/app/(seo)/  src/components/seo/  src/lib/seo/  public/seo/
 # Everything else comes from the site's own code in /opt/garage-deploy/main-src.
 set -euo pipefail
 
 BASE=/opt/garage-deploy
-SEO_DIRS=("content" "src/app/(seo)" "src/components/seo" "public/seo")
+SEO_DIRS=("content" "src/app/(seo)" "src/components/seo" "src/lib/seo" "public/seo")
 
 IN=$(mktemp -d /tmp/garageseo.XXXXXX)
 STAGE=$(mktemp -d /tmp/garage-stage.XXXXXX)
