@@ -1,0 +1,39 @@
+/* Typography for Markdown blocks of the SEO pages (seo_text, intro). */
+.seo-prose {
+  color: var(--color-muted, #b8c0c7);
+  font-size: 1rem;
+  line-height: 1.75;
+  max-width: 48rem;
+}
+.seo-prose > * + * { margin-top: 1em; }
+.seo-prose h2 {
+  margin-top: 2em;
+  font-family: var(--font-oswald), sans-serif;
+  font-size: 1.6rem;
+  font-weight: 600;
+  line-height: 1.25;
+  color: var(--color-offwhite, #f7f8fa);
+  scroll-margin-top: 96px;
+}
+.seo-prose h3 {
+  margin-top: 1.6em;
+  font-family: var(--font-oswald), sans-serif;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--color-offwhite, #f7f8fa);
+  scroll-margin-top: 96px;
+}
+.seo-prose h2:first-child, .seo-prose h3:first-child { margin-top: 0; }
+.seo-prose strong { color: var(--color-offwhite, #f7f8fa); }
+.seo-prose a { color: var(--color-orange, #ff6a00); text-decoration: underline; text-underline-offset: 3px; }
+.seo-prose ul, .seo-prose ol { padding-left: 1.4em; }
+.seo-prose ul { list-style: disc; }
+.seo-prose ol { list-style: decimal; }
+.seo-prose li + li { margin-top: 0.35em; }
+.seo-prose li::marker { color: var(--color-orange, #ff6a00); }
+.seo-prose img { border-radius: 1rem; max-width: 100%; height: auto; }
+.seo-prose blockquote { border-left: 3px solid var(--color-orange, #ff6a00); padding-left: 1em; color: var(--color-light, #d9dde1); }
+.seo-prose table { width: 100%; border-collapse: collapse; font-size: 0.9rem; display: block; overflow-x: auto; }
+.seo-prose th, .seo-prose td { border: 1px solid rgb(255 255 255 / 0.1); padding: 0.6em 0.9em; text-align: left; }
+.seo-prose th { color: var(--color-offwhite, #f7f8fa); background: rgb(255 255 255 / 0.04); }
+.seo-prose code { font-size: 0.9em; color: var(--color-light, #d9dde1); }

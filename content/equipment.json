@@ -1,0 +1,9 @@
+[
+  { "id": "lift2", "name": "Двухстоечный подъёмник", "description": "Электрогидравлический, до 4 т. Полный доступ к днищу, подвеске и тормозам.", "photo": "hall-lifts", "available": true },
+  { "id": "lift4", "name": "Четырёхстоечный подъёмник", "description": "До 4 т, автомобиль стоит на платформе. Подходит для минивэнов и «Газели».", "photo": "hall-lifts", "available": true },
+  { "id": "tools", "name": "Комплект инструмента", "description": "Головки, ключи, трещотки, съёмники — тележка закреплена за постом.", "photo": "tools", "available": true },
+  { "id": "oil-drain", "name": "Слив и приём отработки", "description": "Воронка-маслосборник; отработанное масло оставляете у нас.", "photo": "post-work", "available": true },
+  { "id": "tire-machine", "name": "Шиномонтажный станок и балансировка", "description": "Разбортовка, монтаж и балансировка колёс.", "photo": "tools", "available": true },
+  { "id": "compressor", "name": "Компрессор", "description": "Подкачка шин и продувка.", "photo": "tools", "available": true },
+  { "id": "welding", "name": "Сварка", "description": "Сварочные работы на постах запрещены.", "photo": "tools", "available": false }
+]

@@ -1,0 +1,63 @@
+{
+  "_comment": "Общие данные для всех SEO-шаблонов (не для главной: у главной свои данные в админке). Поля описаны в content/README.md.",
+  "name": "Гараж самообслуживания",
+  "city": "Омск",
+  "address": "г. Омск, ул. Заводская, 1",
+  "address_note": "Нефтяники",
+  "geo": { "lat": 55.049679, "lng": 73.263756 },
+  "phone": "+7 (3812) 38-10-70",
+  "phone_href": "+79039271070",
+  "email": "garazh@garazh-omsk.ru",
+  "hours": "Ежедневно, 09:00–19:00",
+  "opening_hours": [
+    { "days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"], "opens": "09:00", "closes": "19:00" }
+  ],
+  "telegram": "https://t.me/garazh_omsk",
+  "max": "https://max.ru/u/f9LHodD0cOIUF2sBoumwLuqyZzy7FqoB1mWcDaZvfDPp0l8ow9Un7CUWMfQ",
+  "maps": {
+    "yandex": "https://yandex.ru/maps/?text=%D0%9E%D0%BC%D1%81%D0%BA%2C%20%D1%83%D0%BB%D0%B8%D1%86%D0%B0%20%D0%97%D0%B0%D0%B2%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F%2C%201",
+    "yandex_route": "https://yandex.ru/maps/?rtext=~55.049679%2C73.263756&rtt=auto",
+    "twogis": "https://2gis.ru/omsk/firm/70000001117474940",
+    "twogis_route": "https://2gis.ru/omsk/directions/points/%7C73.263756%2C55.049679"
+  },
+  "legal": {
+    "name": "ООО «ГАРМОНИЯ»",
+    "inn": "5528022971",
+    "ogrn": "1045553009292"
+  },
+  "rates": {
+    "post": 400,
+    "lift": 600,
+    "machine": 500,
+    "master": 800,
+    "day": 2700
+  },
+  "_rates_todo": "Ставка master и правило master_mode — заглушки до подтверждения заказчиком.",
+  "master_mode": "on_top",
+  "price_list": [
+    { "name": "Пост без подъёмника", "hour": 400, "day": 2700 },
+    { "name": "Подъёмник 2-стоечный", "hour": 600, "day": 4300 },
+    { "name": "Подъёмник 4-стоечный", "hour": 600, "day": 4300 },
+    { "name": "Шиномонтажный станок и балансировка", "hour": 500, "day": null },
+    { "name": "Комплект инструмента", "hour": 100, "day": 900 },
+    { "name": "Оставить автомобиль на ночь", "hour": null, "day": 500 }
+  ],
+  "price_updated_at": "2026-11-18",
+  "booking_url": "https://n2392236.yclients.ru",
+  "reviews": { "provider": "2gis", "org_id": "70000001117474939", "branch_id": "70000001117474940" },
+  "default_og_image": "hall-lifts",
+  "footer_links": [
+    { "href": "/uslugi", "label": "Услуги" },
+    { "href": "/ceny", "label": "Цены" },
+    { "href": "/svoimi-rukami", "label": "Своими руками" },
+    { "href": "/kontakty", "label": "Контакты" },
+    { "href": "/politika-konfidentsialnosti", "label": "Обработка персональных данных" }
+  ],
+  "templates": {
+    "geo": { "title": "{h1} — от {price_post} ₽/час | Гараж самообслуживания", "description": "{h1}. Пост от {price_post} ₽/час, подъёмник, инструмент, онлайн-запись. Омск, ул. Заводская, 1." },
+    "service": { "title": "{name} своими руками в Омске — от {price_self} ₽", "description": "{name} самостоятельно на подъёмнике: от {price_self} ₽, инструмент включён. Или с мастером. Онлайн-запись, ул. Заводская, 1." },
+    "article": { "title": "{h1} — пошаговая инструкция", "description": "{h1}: что понадобится, сколько времени займёт, пошаговая инструкция. Сделайте сами в гараже самообслуживания в Омске." },
+    "text": { "title": "{h1} | Гараж самообслуживания в Омске", "description": "{h1}. Гараж самообслуживания в Омске: посты, подъёмники, инструмент, онлайн-запись." },
+    "page": { "title": "{h1} | Гараж самообслуживания в Омске", "description": "{h1} — гараж самообслуживания в Омске, ул. Заводская, 1. Пост от {price_post} ₽/час." }
+  }
+}
